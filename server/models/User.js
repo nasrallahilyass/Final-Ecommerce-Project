@@ -1,8 +1,14 @@
-// User schema and model
 const mongoose = require('mongoose');
 
-// Define the user schema
 const userSchema = new mongoose.Schema({
+  first_name: {
+    type: String,
+    required: true,
+  },
+  last_name: {
+    type: String,
+    required: true,
+  },
   username: {
     type: String,
     required: true,
@@ -17,14 +23,27 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  role: {
+    type: String, 
+    enum: ['admin', 'manager'],
+    // required: true,
+  },
+  last_login: {
+    type: Date, 
+  },
+  last_update: {
+    type: Date, 
+  },
+  active: {
+    type: Boolean,
+    default: true, 
+  },
   created_at: {
     type: Date,
     default: Date.now,
   },
 });
 
-// Create a model for the user schema
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;
-
