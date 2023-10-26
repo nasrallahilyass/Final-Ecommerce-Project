@@ -3,16 +3,17 @@
 const mongoose = require('mongoose');
 
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017'
+const ATLAS_URL = process.env.ATLAS_URL;
 
-, {
+const connectDb = () => mongoose.connect(ATLAS_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-});
+})
+  .then(() => {
+    console.log("Connected to MongoDB");
+  })
+  .catch((err) => {
+    console.error("Error connecting to MongoDB: ", err);
+  });
 
-const db = mongoose.connection;
-
-db.on('error', console.error('MongoDB connection error:'));
-db.once('open', () => {
-  console.log('Connected to MongoDB');
-});
+module.exports = { connectDb }
