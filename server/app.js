@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 require('dotenv').config();
 const productRoutes = require('./routes/productRoutes');
+const categorieRoutes = require('./routes/categorieRoutes');
 const { connectDb } = require('./config/database');
 const port = process.env.PORT || 5000; // Use the defined PORT or default to 5000
 
@@ -15,7 +16,10 @@ app.use(cors());
 app.use(express.json());
 
 
-app.use('/v1/products', productRoutes);
+app.use('/v1', productRoutes);
+app.use('/v1', categorieRoutes);
+
+
 
 connectDb();
 

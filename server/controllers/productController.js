@@ -1,5 +1,6 @@
 // Controller for product-related operations
 const Product = require('../models/Product');
+
 // Create a product
 exports.createProduct = async (req, res) => {
   try {
@@ -12,7 +13,7 @@ exports.createProduct = async (req, res) => {
   }
 };
 
-// Listproducts
+// Listproducts--still needs pagination!
 exports.getProducts = async (req, res) => {
   try {
     const products = await Product.find();
