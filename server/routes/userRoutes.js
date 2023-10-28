@@ -9,8 +9,10 @@ const userController = require('../controllers/userController');
 // Add a new user route
 router.post('/users', userController.signup);
 
+
 // Signin and perform a user authentication route
 router.post('/users/login', userController.signin);
+
 
 // Get all the users list route
 router.get('/users', userController.getAllUsers);
@@ -19,7 +21,9 @@ router.get('/users', userController.getAllUsers);
 // Get a user by ID route
 router.get('/users/:id', userController.getUserById);
 
+
 // Search for a user route 
+router.get('/user', userController.searchUsers);
 
 
 // Update the user's data route

@@ -2,6 +2,8 @@
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const paginate = require('express-paginate');
+
 
 
 // const cookie = require('cookie-parser') 
@@ -210,8 +212,45 @@ exports.getUserById = async (req, res) => {
 }; 
 
 
+// Searching for a user
+exports.searchUsers = async (req, res) => {
+    try {
+        const query = req.query.name; // Get the search query from the request
+        const limit = req.query.limit || 10; // Set a default limit (e.g., 10) or use the one provided in the query
 
+        const page = req.query.page || 1; // Set a default page (e.g., 1) or use the one provided in the query
+        const offset = (page - 1) * limit;
 
+        // Create a MongoDB query to search for users
+        const searchCriteria = {
+            $or: [
+                { first_name: { $regex: query, $options: 'i' } },
+                { username: { $regex: query, $options: 'i' } },
+                { last_name: { $regex: query, $options: 'i' } }
+            ]
+        };
+        
+
+        const [results, itemCount] = await Promise.all([
+            User.find(searchCriteria)
+                .limit(limit)
+                .skip(offset)
+                .exec(),
+            User.countDocuments(searchCriteria).exec()
+        ]);
+
+        const pageCount = Math.ceil(itemCount / limit);
+
+        res.status(200).json({
+            users: results,
+            pageCount,
+            itemCount,
+            pages: paginate.getArrayPages(req)(3, pageCount, page),
+        });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
 
 
 //Update the user's data
