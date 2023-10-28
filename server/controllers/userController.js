@@ -2,29 +2,29 @@
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+
+
 // const cookie = require('cookie-parser') 
 require('dotenv').config();
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
-
-
-
-
+// Add a new user
 exports.signup = (req, res) => {
     // Your validation and signup logic here
-    let { first_name, last_name, username, email, password } = req.body;
+    let { first_name, last_name, username, email, password, role } = req.body;
     first_name = first_name.trim();
     last_name = last_name.trim();
     username = username.trim();
     email = email.trim();
     password = password.trim();
-    if (first_name == "" || last_name == "" || username == "" || email == "" || password == "") {
+    role = role.trim();
+    if (first_name == "" || last_name == "" || username == "" || email == "" || password == ""|| role == "") {
         res.json({
             status: 'FAILED',
             message: 'INVALID INPUT FIELDS!'
         });
-    } else if (!/^[a-zA-Z ]*$/.test(first_name) || !/^[a-zA-Z ]*$/.test(last_name)) {
+    } else if (!/^[a-zA-Z ]*$/.test(first_name) || !/^[a-zA-Z ]*$/.test(last_name) || !/^[a-zA-Z ]*$/.test(role)) {
         res.json({
             status: 'FAILED',
             message: 'INVALID NAME ENTER'
@@ -59,6 +59,7 @@ exports.signup = (req, res) => {
                         last_name,
                         username,
                         email,
+                        role,
                         password: hashedPassword,
 
                     });
@@ -95,6 +96,7 @@ exports.signup = (req, res) => {
     }
 };
 
+// Perform a user authentication
 exports.signin = (req, res) => {
     // Your signin logic here
     let { email, password } = req.body;
@@ -158,7 +160,7 @@ exports.signin = (req, res) => {
     }
 };
 
-
+//Get all the users list
 exports.getAllUsers = async (req, res) => {
     const page = parseInt(req.query.page) || 1;
     const limit = 10;
@@ -175,13 +177,114 @@ exports.getAllUsers = async (req, res) => {
     }
 };
 
+//Get a user by ID
+exports.getUserById = async (req, res) => {
+    // Get the user's ID from the URL parameter
+    const userId = req.params.id;
+
+    // Assuming you have a 'role' field in your User model
+    const user = await User.findById(userId); // Assuming you have a user object in your request after authentication
+    if (!user || (user.role !== 'admin' && user.role !== 'manager')) {
+        return res.status(403).json({
+            status: 'FAILED',
+            message: 'Unauthorized: Only admin and manager users can access this endpoint.',
+        });
+    }
+
+    try {
+        // Find the user by ID
+        const foundUser = await User.findById(userId);
+
+        if (!foundUser) {
+            return res.status(404).json({
+                status: 'FAILED',
+                message: 'User not found',
+            });
+        }
+
+        // If the user is found and the requester has the right role, return the user's details
+        res.status(200).json(foundUser);
+    } catch (error) {
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+}; 
 
 
 
 
 
 
+//Update the user's data
+exports.updateUser = async (req, res) => {
+    // Get the user's ID from the URL parameter
+    const userId = req.params.id;
 
+    // Assuming you have a 'role' field in your User model
+    const user = await User.findById(userId);
 
+    // Only allow admin users to update user data
+    // if (!user || (user.role !== 'admin' && user.role !== 'manager')) { // hundel it on thebackoffice 
+    if (!user) {
+        return res.status(403).json({
+            status: 'FAILED',
+            message: 'Unauthorized: Only admin and manager users can access this endpoint.',
+        });
+    }
 
+    // Check if the username and email are unique
+    const { username, email } = req.body;
+    const existingUser = await User.findOne({ username });
+    if (existingUser && existingUser._id.toString() !== userId) {
+        return res.status(400).json({
+            status: 'FAILED',
+            message: 'Username is already taken.',
+        });
+    }
+    const existingEmailUser = await User.findOne({ email });
+    if (existingEmailUser && existingEmailUser._id.toString() !== userId) {
+        return res.status(400).json({
+            status: 'FAILED',
+            message: 'Email is already taken.',
+        });
+    }
 
+    // Update the user's data
+    await User.findByIdAndUpdate(userId, { $set: req.body });
+
+    // Update the last updated date
+    await User.findByIdAndUpdate(userId, { $set: { lastUpdated: new Date() } });
+
+    // Return the updated user data
+    const updatedUser = await User.findById(userId);
+    res.status(200).json(updatedUser);
+};
+
+//Delete a user
+exports.deleteUser = async (req, res) => {
+    // Get the user's ID from the URL parameter
+    const userId = req.params.id;
+
+    // Assuming you have a 'role' field in your User model
+    const user = await User.findById(userId);
+
+    // Only allow admin users to delete other users
+    // if (!user || user.role !== 'admin') {  verifia this later on back-office
+    if (!user) {
+        return res.status(403).json({
+            status: 'FAILED',
+            message: 'Unauthorized: Only admin and manager users can access this endpoint.',
+        });
+    }
+    try {
+        // Delete the user by ID
+        await User.findByIdAndDelete(userId);
+
+        // Return a success message
+        res.status(200).json({
+            status: 'SUCCESS',
+            message: 'User deleted successfully',
+        });
+    } catch (error) {
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+};

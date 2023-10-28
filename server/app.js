@@ -11,6 +11,7 @@ const UserRouter = require("./routes/userRoutes")
 
 const app = express();
 
+
 const bodyParser = require('express').json;
 app.use(bodyParser())
 
