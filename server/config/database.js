@@ -1,20 +1,17 @@
 const mongoose = require('mongoose');
 require('dotenv').config();
-
-// Database connection options
-const options = {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true, // Use the new option for createIndexes
-};
+const mongoURI = process.env.MONGODB_URI;
 
 // Connect to the database
-mongoose.connect(process.env.DATA_BASE_URL, options)
+mongoose.connect(`${mongoURI}`, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
   .then(() => {
-    console.log('Connected to the database');
+    console.log("Connected to MongoDB");
   })
-  .catch((error) => {
-    console.error('Database connection error:', error);
+  .catch((err) => {
+    console.error("Error connecting to MongoDB: ", err);
   });
 
 // Export the Mongoose instance for use in your application

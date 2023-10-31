@@ -1,30 +1,25 @@
 // Main application file
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
 require('dotenv').config();
-
-const port = process.env.PORT || 5000; // Use the defined PORT or default to 5000
-const mongoURI = process.env.MONGODB_URI;
-
+require('./config/database')
+const UserRouter = require("./routes/userRoutes")
+const bodyParser = require('express').json;
+const express = require("express");
+const cors = require("cors");
+const cookie = require('cookie-parser')
+const port = process.env.PORT || 5000; 
 
 
 const app = express();
-app.use(express.static('public'));
+
+
+
+// Midll
+app.use(bodyParser())
+app.use(cookie())
+app.use('/v1',UserRouter)
 
 app.use(cors());
 app.use(express.json());
-
-mongoose.connect(`${mongoURI}`, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-  .then(() => {
-    console.log("Connected to MongoDB");
-  })
-  .catch((err) => {
-    console.error("Error connecting to MongoDB: ", err);
-  });
 
 
 
