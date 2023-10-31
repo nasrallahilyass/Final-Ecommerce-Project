@@ -211,7 +211,6 @@ exports.getUserById = async (req, res) => {
     }
 }; 
 
-
 // Searching for a user
 exports.searchUsers = async (req, res) => {
     try {
@@ -251,7 +250,6 @@ exports.searchUsers = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
-
 
 //Update the user's data
 exports.updateUser = async (req, res) => {

@@ -1,40 +1,18 @@
-// mongoDb Users controllers
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 
-// Import user controller
 const userController = require('../controllers/userController');
+const authMiddleware = require('../middleware/authMiddleware'); 
 
+// Routes that require authentication
+router.get('/users', authMiddleware, userController.getAllUsers);
+router.get('/users/:id', authMiddleware, userController.getUserById);
+router.put('/users/:id', authMiddleware, userController.updateUser);
+router.delete('/users/:id', authMiddleware, userController.deleteUser);
 
-// Add a new user route
+// Other routes that don't require authentication
 router.post('/users', userController.signup);
-
-
-// Signin and perform a user authentication route
 router.post('/users/login', userController.signin);
-
-
-// Get all the users list route
-router.get('/users', userController.getAllUsers);
-
-
-// Get a user by ID route
-router.get('/users/:id', userController.getUserById);
-
-
-// Search for a user route 
 router.get('/user', userController.searchUsers);
 
-
-// Update the user's data route
-router.put('/users/:id', userController.updateUser);
-
-
-// Delete a user route
-router.delete('/users/:id', userController.deleteUser);
-
-
-
-
 module.exports = router;
-
