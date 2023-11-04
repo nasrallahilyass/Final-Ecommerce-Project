@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const ProductSchema = new mongoose.Schema({
+const { Schema } = mongoose;
+const ProductSchema = new Schema({
     sku:{ 
         type : String,
         unique: true
@@ -13,7 +14,8 @@ const ProductSchema = new mongoose.Schema({
         required: true,
     },
     subcategory_id:{
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: 'SubCategorie',
         required:true
     },
     short_description :{

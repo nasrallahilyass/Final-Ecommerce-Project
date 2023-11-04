@@ -1,6 +1,6 @@
 //handlers for subcategories
 const Categorie = require('../models/Categorie');
-const SubCategorie = require('../models/SubCategorie');
+const SubCategorie = require('../models/Subcategory')
 
 //create subctegory 
 exports.CreateSubcategory = async (req, res) => {
@@ -26,12 +26,17 @@ exports.CreateSubcategory = async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 };
-
+//get all subcategories
 exports.GetAllSubcategories = async (req, res) => {
     try {
-        const subcategories = await SubCategorie.find();
-        res.status(200).json({ data: subcategories })
+        const subcategorie = await SubCategorie.find({}).populate("categorie_id")
+        res.status(200).json({ data: subcategorie })
     } catch(err) {
         console.log(err);
     }
 }
+//get subcategory by id 
+
+//update subcategory 
+
+//delete subcategory 

@@ -1,8 +1,17 @@
 const Categorie = require('../models/Categorie');
-const Subcategorie = require('../models/SubCategorie')
+const Subcategorie = require('../models/Subcategory')
 
 // Create category
 exports.createCategorie = async (req, res) => {
+    const user = req.user; // User data from the token
+
+  if (user.role !== 'admin' && user.role !== 'manager') {
+    return res.status(403).json({
+      status: 'FAILED',
+      message: 'Only users with admin or manager roles can create a new category.',
+    });
+  }
+
     try {
         const { category_name, active } = req.body;
         // Check if a category already exists
@@ -19,7 +28,7 @@ exports.createCategorie = async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 }
- // List categories by name 
+// List categories by name 
 
 exports.getCategorieByName = async (req, res) => {
     try {

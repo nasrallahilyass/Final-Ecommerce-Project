@@ -8,6 +8,8 @@ router.post('/products', createProduct);
 
 // List all products
 router.get('/products', getProducts);
+//get product by id
+
 
 // Update a product
 router.put('/:id', updateProduct);

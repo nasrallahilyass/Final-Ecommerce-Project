@@ -16,23 +16,22 @@ exports.createProduct = async (req, res) => {
 // Listproducts--still needs pagination!
 exports.getProducts = async (req, res) => {
   try {
-    const products = await Product.find();
+    const products = await Product.find({}).populate('subcategory_id');
     if(!products){
         return res.status(404).json({message : "thereIs no products"})
     }
-
     res.json(products);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 
 };
+//list product by id
 
 // Update a product
 exports.updateProduct = async (req, res) => {
     const {sku, product_image, product_name,subcategory_id,short_description,long_description,price,discount_price,options,active}= req.body
     const productId = req.params.id;
-
   try {
     const updatedProductFields = {
       sku,

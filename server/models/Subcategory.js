@@ -17,7 +17,6 @@ const SubCategorieSchema= new Schema({
         required :true,
         default : false,
     }
-
 })
 const SubCategorie = mongoose.model('SubCategorie',SubCategorieSchema);
 module.exports =SubCategorie;
