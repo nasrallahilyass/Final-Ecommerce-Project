@@ -1,9 +1,18 @@
 import './App.css'
+import AboutUs from './component/aboutus.component'
+import Main from './component/main.component'
+import Navbar from './component/navbar.component'
+import IconCard from './component/sponsor.component'
 
 function App() {
 
   return (
-    <div>Initializing The Project</div>
+    <>
+      <Navbar/>
+      <Main/>
+      <IconCard/>
+      <AboutUs/>
+    </>
   )
     
 }
