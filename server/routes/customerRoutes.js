@@ -20,4 +20,6 @@ router.get('/:id',adminAuthenticated,customerController.getCustomerById);
 router.delete('/:id', customerAuthMiddleware,customerController.deleteCustomer);
 
 
+
+
 module.exports = router;
