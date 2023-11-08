@@ -7,9 +7,7 @@ const paginate = require('express-paginate');
 
 
 // const cookie = require('cookie-parser') 
-require('dotenv').config();
 
-const JWT_SECRET = process.env.JWT_SECRET;
 
 // Add a new user
 exports.signup = (req, res) => {

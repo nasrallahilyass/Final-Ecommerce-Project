@@ -19,12 +19,12 @@ const Navbar = () => {
         </div>
         {/* Buttons on the right */}
         <div className="flex items-center space-x-7 ">
+          {/* Sign In Button */}
+          <button className="hover:text-gray-400">Sign In</button>
           {/* Search Button */}
           <button className="hover:text-gray-400">
             <FaSearch size={24} />
           </button>
-          {/* Sign In Button */}
-          <button className="hover:text-gray-400">Sign In</button>
           {/* Love Icon Button */}
           <button className="hover:text-gray-400">
             <FaHeart size={24} />
