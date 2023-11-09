@@ -5,7 +5,9 @@ const subCategorieController = require('../controllers/subcategorieController');
 router.get('/subcategorie', subCategorieController.GetAllSubcategories)
 
 router.post('/subcategorie', subCategorieController.CreateSubcategory)
-router.get('/subcategorie/:id', subCategorieController.GetAllSubcategoriByID )
+router.get('/subcategorie/:id', subCategorieController.GetAllSubcategoriByID )    
+router.get('/subcategories', subCategorieController.searchSubcategories)
+
 router.put('/subcategorie/:id', subCategorieController.updateSubcategory)
-router.put('/subcategorie/:id', subCategorieController.deleteSubcategory)
+router.delete('/subcategories/:id', subCategorieController.Deletesub)
 module.exports = router;

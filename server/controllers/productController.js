@@ -1,9 +1,11 @@
 // Controller for product-related operations
 const Product = require('../models/Product');
+const SubCategorie = require('../models/Subcategory')
 
 // Create a product
 exports.createProduct = async (req, res) => {
   try {
+
     const newProduct = new Product(req.body);
     const savedProduct = await newProduct.save();
 
@@ -25,11 +27,18 @@ exports.getProducts = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 
-};
+}
 //list product by id
-
+ 
 // Update a product
 exports.updateProduct = async (req, res) => {
+  const user = req.user; // User data from the token
+  // if (user.role !== 'admin' && user.role !== 'manager') {
+  //   return res.status(403).json({
+  //     status: 'FAILED',
+  //     message: 'Only users with admin or manager roles can update a category.',
+  //   });
+  // }
     const {sku, product_image, product_name,subcategory_id,short_description,long_description,price,discount_price,options,active}= req.body
     const productId = req.params.id;
   try {
@@ -44,19 +53,20 @@ exports.updateProduct = async (req, res) => {
       options,
       active
     }
-
     if (product_image) {
       updatedProductFields.product_image = product_image
-    }
-
-    const updatedProduct = await Product.findByIdAndUpdate(productId, updatedProductFields, { new: true });
-     
+    } 
+    //check if the product exist  and the sub category exist 
+     const subtoupdate = await SubCategorie.findById(subcategory_id)
+     const updatedProduct = await Product.findByIdAndUpdate(productId, updatedProductFields, { new: true });
+    if (!updatedProduct|| !subtoupdate){
+      res.status(404).json({message: "invvalid product id or invalid subcategory id"})
+    } 
     res.json(updatedProduct);
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
-};
-
+}
 // Delete a product
 exports.deleteProduct = async (req, res) => {
   try {
@@ -65,4 +75,4 @@ exports.deleteProduct = async (req, res) => {
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
-};
+}

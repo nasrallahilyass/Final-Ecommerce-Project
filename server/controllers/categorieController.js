@@ -28,8 +28,26 @@ exports.createCategorie = async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 }
-//----------------search for category 
+//search for category 
+exports.searchCategory= async (req, res) => {
+  try {
+    const categoryName = req.query.query;
 
+    //  case-insensitive search 
+    const categories = await Categorie.find({
+      category_name: { $regex: categoryName, $options: 'i' },
+    });
+
+    if (categories.length === 0) {
+      return res.status(200).json([]);
+    }
+
+    res.status(200).json({ data: categories });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: err.message });
+  }
+};
 // get categorie by id 
 exports.getCategorieByID = async (req, res) => {
     try {
@@ -62,9 +80,7 @@ exports.getCategorie =async(req,res)=>{
       } catch (err) {
         res.status(500).json({ error: err.message });
       } 
-  }
-
-
+};
 //update category
 exports.updateCategorie = async (req, res) => {
     const user = req.user; // User data from the token
@@ -110,15 +126,10 @@ exports.updateCategorie = async (req, res) => {
       console.error(err);
       res.status(500).json({ error: err.message });
     }
-  };
-  
-
-
-
+};
 //delete Category
 exports.DeleteCategory = async (req, res) => {
     const user = req.user; // User data from the token
-  
     if (user.role !== 'admin' && user.role !== 'manager') {
       return res.status(403).json({
         status: 'FAILED',
@@ -144,5 +155,3 @@ exports.DeleteCategory = async (req, res) => {
         res.status(500).json({ error: err?.message });
     }
 };
-
-

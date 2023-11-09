@@ -6,8 +6,9 @@ const authMiddleware = require('../middleware/authMiddleware');
  router.post('/categories',authMiddleware, categorieController.createCategorie);
  //list all categories
  router.get('/categories', categorieController.getCategorie)
- //get category by name (byID)
+ //get category byID
  router.get('/categorie/:id', categorieController.getCategorieByID)
+ router.get('/categorie', categorieController.searchCategory)
  //update category
 router.put('/categorie/:id', authMiddleware,categorieController.updateCategorie)
  //delete category
