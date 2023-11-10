@@ -1,38 +1,54 @@
-import { FaSearch, FaHeart, FaShoppingBag } from 'react-icons/fa';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import {
+  faSearch,
+  faCartShopping,
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+// Configure Font Awesome icons
+library.add(faSearch, faCartShopping);
 
 const Navbar = () => {
   return (
-    <nav className="bg-white-800 text-black p-4 w-11/12 mx-auto">
+    <nav className="bg-white-800 p-4 w-11/12 mx-auto">
       <div className="container mx-auto flex items-center justify-between">
         {/* Logo and Category Icon */}
         <div className="flex items-center space-x-2">
-          <a href="/" className="text-2xl font-bold">
+          <a href="/" className="text-xl font-bold">
             Your Logo
           </a>
         </div>
         {/* Category Icons */}
-        <div className="hidden md:flex space-x-5">
-          <a href="#" className="hover:text-gray-400">Category 1</a>
-          <a href="#" className="hover:text-gray-400">Category 2</a>
-          <a href="#" className="hover:text-gray-400">Category 3</a>
-          <a href="#" className="hover:text-gray-400">Category 4</a>
+        <div className="hidden md:flex space-x-5 text-l">
+          <a href="#" className="hover:text-gray-400">
+            Home
+          </a>
+          <a href="#" className="hover:text-gray-400">
+            Product
+          </a>
+          <a href="#" className="hover:text-gray-400">
+            Newsfeed
+          </a>
+          <a href="#" className="hover:text-gray-400">
+            Promo
+          </a>
         </div>
         {/* Buttons on the right */}
-        <div className="flex items-center space-x-7 ">
-          {/* Sign In Button */}
-          <button className="hover:text-gray-400">Sign In</button>
+        <div className="flex items-center space-x-7">
           {/* Search Button */}
           <button className="hover:text-gray-400">
-            <FaSearch size={24} />
-          </button>
-          {/* Love Icon Button */}
-          <button className="hover:text-gray-400">
-            <FaHeart size={24} />
+            <FontAwesomeIcon icon={faSearch} size="lg" />
           </button>
           {/* Shopping Bag Icon Button */}
           <button className="hover:text-gray-400">
-            <FaShoppingBag size={24} />
+            <FontAwesomeIcon icon={faCartShopping} size="lg" />
           </button>
+          {/* Bar */}
+          <button className="hover:text-gray-400">|</button>
+          {/* Sign In Button */}
+          <button className="hover:text-gray-400">Sign In</button>
+          {/* Sign Up Button */}
+          <button className="hover:text-gray-400 bg-black text-white px-2 py-2 rounded-md">Sign Up</button>
         </div>
       </div>
     </nav>
