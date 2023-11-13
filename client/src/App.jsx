@@ -1,11 +1,18 @@
 import './App.css'
 
-function App() {
+import Signup from './components/signup'
+import Login from './components/login'
+import { Routes, Route} from 'react-router-dom';
 
+function App() {
   return (
-    <div>Initializing The Project</div>
-  )
-    
+    <Routes>
+      
+        <Route path="/costumer" element={<Signup />} />
+        <Route path="/login" element={<Login/>} />
+      
+    </Routes>
+  );
 }
 
-export default App
+export default App;
