@@ -1,15 +1,15 @@
 // Authentication middleware
 
 const jwt = require('jsonwebtoken')
-require('dotenv').config();
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
 
 const authMiddleware = (req, res, next) => {
+  try {
     // Get the token from the request header
     const token = req.cookies.token;
-    console.log(token)
+    // console.log("heeeee> ",token)
   
     // Check if a token is provided
     if (!token) {
@@ -20,15 +20,13 @@ const authMiddleware = (req, res, next) => {
       });
     }
   
-    try {
       // Verify the token
       const decoded = jwt.verify(token, JWT_SECRET,{ algorithms: ['HS256'] });
-  
       // Attach the decoded user information to the request
       req.user = decoded;
-  
+      
       // Continue with the next middleware or route handler
-      next();
+      return next();
     } catch (error) {
       console.log('Token verification failed:', error);
       return res.status(401).json({

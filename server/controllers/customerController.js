@@ -101,8 +101,8 @@ exports.signin = async (req, res) => {
           const passwordMatch = await argon2.verify(hashedPassword, password);
 
           if (passwordMatch) {
-            const token = jwt.sign({ email: customer.email, id : customer._id}, JWT_SECRET, {
-              expiresIn: "2h"
+            const token = jwt.sign({ email: customer.email, id : customer._id, role: customer.role}, JWT_SECRET, {
+              expiresIn: "3h"
             });
 
             // Set the token as an HTTP-only cookie
@@ -167,7 +167,6 @@ exports.getCustomerById = async (req, res) => {
   if (req.user.role !== 'admin' && req.user.role !== 'manager') {
     return res.status(403).json({
       status: 'FAILED',
-    
       message: 'Unauthorized: Only admin and manager users can access this endpoint.',
     });
   }
@@ -217,6 +216,127 @@ try {
 }
 };
 
+//get customer's profile
+exports.getCustomerProfile = async (req, res)=>{
+    try {
+      const customer = req.customer;
+   
+      if (!customer) {
+        return res.json({
+          status: "FAILED",
+          message: "Customer not found",
+        });
+      }
+  
+      res.json({
+        status: "SUCCESS",
+        message: "Customer profile retrieved successfully",
+        data: {
+          first_name: customer.first_name,
+          last_name: customer.last_name,
+          email: customer.email,
+          // Add any other profile information you want to include
+        },
+      });
+    } catch (err) {
+      console.error(err);
+      res.json({
+        status: "FAILED",
+        message: "An error occurred while fetching customer profile",
+        error: err.message,
+      });
+    }
+};
+
+//search for a customer  
+  exports.searchCustomers = async (req, res) => {
+    try {
+      const query = req.query.query; // Get the search query from the request
+      const limit = parseInt(req.query.limit)  ; // Set a default limit (e.g., 10) or use the one provided in the query
+      const page = parseInt(req.query.page) ; // Set a default page (e.g., 1) or use the one provided in the query
+      const offset = (page - 1) * limit;
+  
+      // Create a MongoDB query to search for customers
+      const searchCriteria = {
+        $or: [
+          { first_name: { $regex: query, $options: 'i' } },
+          { last_name: { $regex: query, $options: 'i' } }
+        ]
+      };
+      
+     
+
+      const sortDirection = req.query.sort === 'DESC' ? -1 : 1; // Sort direction (1 for ascending, -1 for descending)
+
+      // Use try-catch for MongoDB queries to handle potential errors
+      const [results, itemCount] = await Promise.all([
+        Customer.find(searchCriteria)
+          .sort({ first_name: sortDirection }) // Sort by first_name
+          .limit(limit)
+          .skip(offset)
+          .exec(),
+        Customer.countDocuments(searchCriteria).exec()
+      ]);
+
+      const pageCount = Math.ceil(itemCount / limit);
+  
+      res.status(200).json({
+        customers: results,
+        pageCount,
+        itemCount,
+        pages: paginate.getArrayPages(req)(3, pageCount, page),
+      });
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  };
+
+//Update the customer's data  
+exports.updateCustomerProfile = async (req, res) => {
+  try {
+    // Get the access token from the request headers
+    const token = req.cookies.token;
+    console.log(token)
+
+    // Verify the access token and extract the customer ID
+
+    const decoded = jwt.verify(token, JWT_SECRET); 
+    console.log('Decoded:', decoded);
+
+    const customerId = decoded.id;
+    console.log('customerId:', customerId);
+
+    // Check if the customer ID exists
+    if (!customerId) {
+      return res.status(403).json({ message: 'Invalid access token' });
+    }
+
+    // Extract updated customer data from the request body
+    const updatedData = {
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
+      email: req.body.email,
+      // Add other fields as needed
+    };
+
+    // Check if the provided email is unique
+    const isEmailUnique = await Customer.findOne({ email: updatedData.email, _id: { $ne: customerId } });
+    if (isEmailUnique) {
+      return res.status(400).json({ message: 'Email is already in use by another customer' });
+    }
+
+    // Update the customer data
+    const updatedCustomer = await Customer.findByIdAndUpdate(customerId, updatedData, { new: true });
+
+    if (!updatedCustomer) {
+      return res.status(404).json({ message: 'Customer not found' });
+    }
+
+    res.status(200).json({ message: 'Customer data updated successfully', customer: updatedCustomer });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
 
 module.exports = exports

@@ -18,7 +18,7 @@ const CustomerSchema = new mongoose.Schema({
   }, 
   password:{
     type: String,
-    required: true
+    required: true 
   }, 
   creation_date: {
      type: Date, 
@@ -31,6 +31,10 @@ const CustomerSchema = new mongoose.Schema({
      type: Boolean,
       //default:true
      }, 
+  role:{
+    type:String,
+    default:'customer'
+  },
 });
 
 

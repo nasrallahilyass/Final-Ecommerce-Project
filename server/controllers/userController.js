@@ -119,14 +119,14 @@ exports.signin = (req, res) => {
                 bcrypt.compare(password, hashedPassword).then(result => {
                     if (result) {
                         const token = jwt.sign(
-                            { username: data[0].username, email: data[0].email, role: data[0].role },
+                            { id: data[0]._id, email: data[0].email, role: data[0].role },
                             JWT_SECRET,
-                            { expiresIn: "2h",algorithm: "HS256" }
+                            { expiresIn: "3h",algorithm: "HS256" }
                           );
                           res.cookie("token", token, { httpOnly: true });
                         // Passwords match
                         res
-                        .cookie("token", token, { httpOnly: true })
+                        // .cookie("token", token, { httpOnly: true })
                         .json({
                             status: 'SUCCESS',
                             message: 'Signin successful',
