@@ -291,7 +291,7 @@ exports.getCustomerProfile = async (req, res)=>{
     }
   };
 
-//Update the customer's data  
+//Update the customer's profile
 exports.updateCustomerProfile = async (req, res) => {
   try {
     // Get the access token from the request headers
@@ -337,6 +337,49 @@ exports.updateCustomerProfile = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+//Update the customers by admins //not working
+exports.updateCustomer = async (req, res) => {
+  try {
+    const customerId = req.params.id;
+    const { email, first_name, last_name, role, active } = req.body;
+
+    // Check if the customer with the given ID exists
+    const existingCustomer = await Customer.findById(customerId);
+    if (!existingCustomer) {
+      return res.status(404).json({ error: 'Customer not found' });
+    }
+
+    // Check if the user is admin or manager
+    const userRole = req.user.role;
+    if (!(userRole === 'admin' || userRole === 'manager')) {
+      return res.status(403).json({ error: 'Unauthorized' });
+    }
+
+    // Check email uniqueness
+    const isEmailUnique = await Customer.findOne({ email, _id: { $ne: customerId } });
+    if (isEmailUnique) {
+      return res.status(400).json({ error: 'Email already in use' });
+    }
+
+    // Update customer data
+    existingCustomer.email = email;
+    existingCustomer.first_name = first_name;
+    existingCustomer.last_name = last_name;
+    existingCustomer.role = role;
+    existingCustomer.active = active;
+
+    // Save the updated customer
+    const updatedCustomer = await existingCustomer.save();
+
+    res.json(updatedCustomer);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+
 
 
 module.exports = exports
