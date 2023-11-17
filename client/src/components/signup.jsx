@@ -5,6 +5,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import LayoutSingUp from './Layout/LayoutSingUp';
 
+
+
 const validationSchema = z.object({
   firstName: z.string().min(2, 'First name must be at least 2 characters'),
   lastName: z.string().min(2, 'Last name must be at least 2 characters'),
@@ -20,7 +22,7 @@ function Signup() {
     password: '',
   });
 
-  const [errors, setErrors] = useState({});
+  const [errors , setErrors] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -33,6 +35,7 @@ function Signup() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const validationResult = validationSchema.safeParse(formData);
+    setErrors({});
     if (validationResult.success) {
       // Data is valid, you can proceed with form submission
       console.log('Form data is valid:', formData);
@@ -44,12 +47,8 @@ function Signup() {
     
     } else {
       // Data is invalid, set the errors
-      //setErrors(validationResult.error.issues);
-      console.log("error",validationResult.error.issues);
-      toast.error(validationResult.error.issues[0].message, {
-        position: "top-right",
-        autoClose: 3000, // Automatically close after 3 seconds
-      });
+      setErrors(validationResult.error.issues);
+      console.log('Errors:', errors);
     }
   };
 
@@ -96,9 +95,9 @@ function Signup() {
                         placeholder="John"
                       />
                     </div>
-                    {errors.firstName && (
-                      <div className="text-red-600 text-xs mt-2">{errors.firstName.message}</div>
-                    )}
+                    {errors && (
+                        <div className="text-red-600 text-xs flex display-start pl-2 mt-2 ">{errors[0]?.message} </div>
+                     )}
                   </div>
                   <div className="w-1/2 px-3 mb-5">
                     <label htmlFor="lastName" className="text-xs font-semibold px-1">
@@ -117,9 +116,9 @@ function Signup() {
                         placeholder="Smith"
                       />
                     </div>
-                    {errors.lastName && (
-                      <div className="text-red-600 text-xs mt-2">{errors.lastName.message}</div>
-                    )}
+                    {errors && (
+                <div className="text-red-600 text-xs flex display-start pl-2 mt-2 ">{errors[1]?.message} </div>
+              )}
                   </div>
                 </div>
                 <div className="flex -mx-3">
@@ -140,9 +139,9 @@ function Signup() {
                         placeholder="johnsmith@example.com"
                       />
                     </div>
-                    {errors.email && (
-                      <div className="text-red-600 text-xs mt-2">{errors.email.message}</div>
-                    )}
+                    {errors && (
+                <div className="text-red-600 text-xs flex display-start pl-2 mt-2 ">{errors[2]?.message} </div>
+              )}
                   </div>
                 </div>
                 <div className="flex -mx-3">
@@ -163,9 +162,9 @@ function Signup() {
                         placeholder="************"
                       />
                     </div>
-                    {errors.password && (
-                      <div className="text-red-600 text-xs mt-2">{errors.password.message}</div>
-                    )}
+                    {errors && (
+                <div className="text-red-600 text-xs flex display-start pl-2 mt-2">{errors[3]?.message} </div>
+              )}
                   </div>
                 </div>
                 <div className="flex -mx-3">

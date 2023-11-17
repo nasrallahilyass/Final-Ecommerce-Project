@@ -7,6 +7,17 @@ const express = require("express");
 const cors = require("cors");
 const cookie = require('cookie-parser')
 const port = process.env.PORT || 5000; 
+// reducers/index.js
+import { combineReducers } from 'redux';
+import authReducer from './authReducer';
+
+const rootReducer = combineReducers({
+  auth: authReducer,
+  // Add other reducers if needed
+});
+
+export default rootReducer;
+
 
 
 const app = express();
