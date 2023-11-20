@@ -5,13 +5,13 @@ const PORT = process.env.PORT ||3000;
 const UserRouter = require("./routes/userRoutes");
 const customerRoutes = require('./routes/customerRoutes.js');
 const cookieParser = require('cookie-parser');
-
+const cors = require("cors")
 const app = express();
 
 
 require('./config/database')
 app.use(cookieParser());
-
+app.use(cors())
 
 // app.use(bodyParser.json())
 

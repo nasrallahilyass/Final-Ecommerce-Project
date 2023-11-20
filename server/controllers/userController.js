@@ -13,8 +13,16 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 // Add a new user
 exports.signup = (req, res) => {
+    console.log(req.body)
     // Your validation and signup logic here
-    let { first_name, last_name, username, email, password, role } = req.body;
+    let {
+        first_name = "",
+        last_name = "",
+        username = "",
+        email = "",
+        password = "",
+        role = ""
+    } = req.body;
     first_name = first_name.trim();
     last_name = last_name.trim();
     username = username.trim();
