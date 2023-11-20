@@ -1,28 +1,26 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useState } from 'react';
-import { z } from 'zod';
-import { ToastContainer, toast } from 'react-toastify';
+import React, { useState } from "react";
+import { z } from "zod";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import LayoutSingUp from './Layout/LayoutSingUp';
-
-
+import LayoutSingUp from "./Layout/LayoutSingUp";
 
 const validationSchema = z.object({
-  firstName: z.string().min(2, 'First name must be at least 2 characters'),
-  lastName: z.string().min(2, 'Last name must be at least 2 characters'),
-  email: z.string().email('Invalid email address'),
-  password: z.string().min(8, 'Password must be at least 8 characters'),
+  firstName: z.string().min(2, "First name must be at least 2 characters"),
+  lastName: z.string().min(2, "Last name must be at least 2 characters"),
+  email: z.string().email("Invalid email address"),
+  password: z.string().min(8, "Password must be at least 8 characters"),
 });
 
 function Signup() {
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
   });
 
-  const [errors , setErrors] = useState({});
+  const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -38,23 +36,26 @@ function Signup() {
     setErrors({});
     if (validationResult.success) {
       // Data is valid, you can proceed with form submission
-      console.log('Form data is valid:', formData);
-      toast.success('Form data is valid', {
+      console.log("Form data is valid:", formData);
+      toast.success("Form data is valid", {
         position: "top-right",
         theme: "dark",
         autoClose: 3000, // Automatically close after 3 seconds
       });
-    
     } else {
       // Data is invalid, set the errors
-      setErrors(validationResult.error.issues);
-      console.log('Errors:', errors);
+      setErrors(
+        validationResult.error.errors.reduce((acc, error) => {
+          acc[error.path[0]] = error.message;
+          return acc;
+        }, {})
+      );
     }
   };
 
   return (
     <>
-    <ToastContainer />
+      <ToastContainer />
       <style
         dangerouslySetInnerHTML={{
           __html:
@@ -62,14 +63,11 @@ function Signup() {
         }}
       />
       <div className="min-w-screen min-h-screen flex items-center justify-center">
-        <div
-          className="bg-gray-100 text-gray-500 shadow-xl w-full overflow-hidden"
-        >
+        <div className="bg-gray-100 text-gray-500 shadow-xl w-full overflow-hidden">
           <div className="md:flex w-full ">
             <div className="hidden md:block w-1/3 bg-orange-200 ">
-              <img src='./img/CRAFTY.png' alt='crafty' 
-              className='absolute'/>
-             <LayoutSingUp />
+              <img src="./img/CRAFTY.png" alt="crafty" className="absolute" />
+              <LayoutSingUp />
             </div>
             <div className="w-full md:w-2/3 py-10 px-5 md:px-10">
               <div className="text-center mb-10">
@@ -79,7 +77,10 @@ function Signup() {
               <div>
                 <div className="flex -mx-3">
                   <div className="w-1/2 px-3 mb-5">
-                    <label htmlFor="firstName" className="text-xs font-semibold px-1">
+                    <label
+                      htmlFor="firstName"
+                      className="text-xs font-semibold px-1"
+                    >
                       First name
                     </label>
                     <div className="flex">
@@ -95,12 +96,17 @@ function Signup() {
                         placeholder="John"
                       />
                     </div>
-                    {errors && (
-                        <div className="text-red-600 text-xs flex display-start pl-2 mt-2 ">{errors[0]?.message} </div>
-                     )}
+                    {errors.firstName && (
+                      <div className="text-red-600 text-xs flex pl-2 mt-1">
+                        {errors.firstName}
+                      </div>
+                    )}
                   </div>
                   <div className="w-1/2 px-3 mb-5">
-                    <label htmlFor="lastName" className="text-xs font-semibold px-1">
+                    <label
+                      htmlFor="lastName"
+                      className="text-xs font-semibold px-1"
+                    >
                       Last name
                     </label>
                     <div className="flex">
@@ -116,14 +122,19 @@ function Signup() {
                         placeholder="Smith"
                       />
                     </div>
-                    {errors && (
-                <div className="text-red-600 text-xs flex display-start pl-2 mt-2 ">{errors[1]?.message} </div>
-              )}
+                    {errors.lastName && (
+                      <div className="text-red-600 text-xs flex pl-2 mt-1">
+                        {errors.lastName}
+                      </div>
+                    )}
                   </div>
                 </div>
                 <div className="flex -mx-3">
                   <div className="w-full px-3 mb-5">
-                    <label htmlFor="email" className="text-xs font-semibold px-1">
+                    <label
+                      htmlFor="email"
+                      className="text-xs font-semibold px-1"
+                    >
                       Email
                     </label>
                     <div className="flex">
@@ -139,14 +150,19 @@ function Signup() {
                         placeholder="johnsmith@example.com"
                       />
                     </div>
-                    {errors && (
-                <div className="text-red-600 text-xs flex display-start pl-2 mt-2 ">{errors[2]?.message} </div>
-              )}
+                    {errors.email && (
+                      <div className="text-red-600 text-xs flex pl-2 mt-1">
+                        {errors.email}
+                      </div>
+                    )}
                   </div>
                 </div>
                 <div className="flex -mx-3">
                   <div className="w-full px-3 mb-12">
-                    <label htmlFor="password" className="text-xs font-semibold px-1">
+                    <label
+                      htmlFor="password"
+                      className="text-xs font-semibold px-1"
+                    >
                       Password
                     </label>
                     <div className="flex">
@@ -162,9 +178,11 @@ function Signup() {
                         placeholder="************"
                       />
                     </div>
-                    {errors && (
-                <div className="text-red-600 text-xs flex display-start pl-2 mt-2">{errors[3]?.message} </div>
-              )}
+                    {errors.password && (
+                      <div className="text-red-600 text-xs flex display-start pl-2 mt-2">
+                        {errors.password}
+                      </div>
+                    )}
                   </div>
                 </div>
                 <div className="flex -mx-3">
