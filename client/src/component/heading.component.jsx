@@ -9,7 +9,7 @@ function Heading() {
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae vero esse labore nam quam! Unde.
           </p>
           <div className="text-white flex space-x-2 md:space-x-28">
-            <button className="hover:text-gray-400 bg-gray-800 text-white px-3 py-2 rounded-md">
+            <button className="hover:text-gray-400 bg-accent text-secondary px-3 py-2 rounded-md">
               Shop Now
             </button>
             <div className="flex items-center space-x-3">

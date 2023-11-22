@@ -1,7 +1,8 @@
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faSearch, faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import logoImage from "../assets/images/logo.png";
+import { Link } from "react-router-dom";
+import ProductsPage from "../pages/productsPage";
 
 // Configure Font Awesome icons
 library.add(faSearch, faCartShopping);
@@ -11,17 +12,15 @@ const Navbar = () => {
     <nav className="p-4 w-11/12 mx-auto">
       <div className=" container mx-auto flex items-center justify-between">
         {/* Logo and Category Icon */}
-        <div className="flex items-center space-x-2">
-          <img src={logoImage} alt="" className="h-16"/>
-        </div>
+        <p className="font-bold text-xl">Logo</p>
         {/* Category Icons */}
-        <div className="hidden md:flex space-x-5 text-l">
+        <div className="hidden md:flex pl-12 space-x-7 text-l">
           <a href="#" className="hover:text-gray-400">
             Home
           </a>
-          <a href="#" className="hover:text-gray-400">
+          <Link to='/products' className="hover:text-gray-400">
             Product
-          </a>
+          </Link>
           <a href="#" className="hover:text-gray-400">
             Newsfeed
           </a>

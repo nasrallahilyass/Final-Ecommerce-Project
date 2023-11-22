@@ -3,7 +3,7 @@ import { BiLogoDribbble, BiLogoMediumOld } from "react-icons/bi";
 
 function ServiceCard({ icon, title, description }) {
   return (
-    <div className="py-8 px-12 mb-12 bg-gray-100 border-b border-gray-100">
+    <div className="py-8 px-12 mb-12 bg-gray-100 border-gray-100">
       <div className="inline-block text-gray-900 mb-4">{icon}</div>
       <h3 className="text-lg leading-normal mb-2 font-semibold text-black">
         {title}

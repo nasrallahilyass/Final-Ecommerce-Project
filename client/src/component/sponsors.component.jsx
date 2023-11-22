@@ -4,7 +4,7 @@ import { BiLogoDribbble, BiLogoMediumOld } from "react-icons/bi";
 
 function Sponsors() {
   return (
-    <div className=" mt-12 font-semibold	text-secondary text-2xl p-4 w-11/12 mx-auto flex space-x-32 justify-center">
+    <div className=" mt-12 font-semibold	text-gray text-2xl p-4 w-11/12 mx-auto flex space-x-32 justify-center">
       <div className="flex space-x-2  hover:text-black   ">
         <button className="">
           <FaPaypal />
