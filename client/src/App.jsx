@@ -1,9 +1,16 @@
 import './App.css'
 
+// import LangingPage from './pages/landingPage'
+import ProductsPage from './pages/productsPage'
+
+
 function App() {
 
   return (
-    <div>Initializing The Project</div>
+    <>
+      {/* <LangingPage/> */}
+      <ProductsPage/>
+    </>
   )
     
 }
