@@ -6,4 +6,5 @@ export const apiSlice = createApi({
     baseQuery,
     tagTypes:['Seller'],
     endpoints:(builder) =>({}),
+    
 })

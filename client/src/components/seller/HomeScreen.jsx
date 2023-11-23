@@ -1,10 +1,10 @@
-import Hero from "./Hero";
+// import Hero from "./Hero";
 
 
 function HomeScreen() {
-  return (
-    <Hero/>
-  )
+  return
+    // <Hero/>
+  
 }
 
 export default HomeScreen

@@ -8,8 +8,8 @@ const JWT_SECRET = process.env.JWT_SECRET;
 const authMiddleware = (req, res, next) => {
   try {
     // Get the token from the request header
-    const token = req.cookies.token;
-    // console.log("heeeee> ",token)
+    const token = req.headers["authorization"]?.split(" ")[1];
+    console.log("heeeee> ",token)
   
     // Check if a token is provided
     if (!token) {

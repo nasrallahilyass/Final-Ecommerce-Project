@@ -12,7 +12,7 @@ router.delete("/users/:id", authMiddleware, userController.deleteUser);
  
 // Other routes that don't require authentication
 router.post("/users/register", userController.signup);
-router.post("/users/login", userController.signin);
+router.post("/users/login",userController.signin);
 router.get("/user", userController.searchUsers);
 
 module.exports = router;

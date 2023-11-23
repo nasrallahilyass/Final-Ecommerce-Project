@@ -23,13 +23,7 @@ export const sellersApiSlice = apiSlice.injectEndpoints({
                 method:'POST'
             })
         }),
-        updateSeller: builder.mutation({
-            query:(data) => ({
-                url: `${SELLERS_URL}/profile`,
-                method:'PUT',
-                body: data
-            }),
-        }),
+        
 
     })
 })

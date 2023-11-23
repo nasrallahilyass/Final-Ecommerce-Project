@@ -5,8 +5,9 @@ import {  useSelector } from "react-redux";
 
 function PrivateRoute() {
 
-    const {sellerInfo} = useSelector((state)=>(state.auth))
-  return ( sellerInfo? <Outlet/>: <Navigate to='/login' replace/> )
+    const {jwt} = useSelector((state)=>(state.auth))
+    console.log(jwt)
+  return ( jwt? <Outlet/>: <Navigate to='/login' replace/> )
 }
 
-export default PrivateRoute
+export default PrivateRoute 
