@@ -1,10 +1,16 @@
 // Authentication middleware
+
 const jwt = require('jsonwebtoken')
+
 const JWT_SECRET = process.env.JWT_SECRET;
 
+
 const authMiddleware = (req, res, next) => {
+  try {
     // Get the token from the request header
-    const token = req.cookies.token;
+    const token = req.headers["authorization"]?.split(" ")[1];
+    console.log("heeeee> ",token)
+  
     // Check if a token is provided
     if (!token) {
       console.log('Token missing');
@@ -13,15 +19,14 @@ const authMiddleware = (req, res, next) => {
         message: 'Authentication required',
       });
     }
-    try {
-      // Verify the token
-      const decoded = jwt.verify(token, JWT_SECRET);
   
+      // Verify the token
+      const decoded = jwt.verify(token, JWT_SECRET,{ algorithms: ['HS256'] });
       // Attach the decoded user information to the request
       req.user = decoded;
-  
+      
       // Continue with the next middleware or route handler
-      next();
+      return next();
     } catch (error) {
       console.log('Token verification failed:', error);
       return res.status(401).json({
@@ -30,6 +35,8 @@ const authMiddleware = (req, res, next) => {
       });
     }
   };
-  
+
+
+
 
 module.exports = authMiddleware;

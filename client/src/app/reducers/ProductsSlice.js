@@ -3,7 +3,7 @@ import axios from "axios";
  
 export const fetchAllProducts = createAsyncThunk('products/getAllProducts', async (_, { rejectWithValue }) => {
     try {
-        const products = await axios.get('http://localhost:5000/v1/products')
+        const products = await axios.get('http://localhost:3000/v1/products')
         console.log(products);
         return products.data; // Assuming the products are in the 'data' property
 
