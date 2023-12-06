@@ -9,7 +9,7 @@ function Dashboard() {
     <div>
       <Button></Button>
         <Sidebar/>
-        <Products></Products>
+        {/* <Products></Products> */}
     </div>
   )
 }
