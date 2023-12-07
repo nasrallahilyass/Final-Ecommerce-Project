@@ -4,12 +4,13 @@ import axios from "axios";
 export const fetchAllProducts = createAsyncThunk('products/getAllProducts', async (_, { rejectWithValue }) => {
     try {
         const products = await axios.get('http://localhost:3000/v1/products')
-        console.log(products);
-        return products.data; // Assuming the products are in the 'data' property
-
+        console.log("hello ddddd",products.data);
+        return products.data; 
+    
     } catch (error) {
-        console.log(error);
-        return rejectWithValue(error);
+        console.warn(error);
+        // return null
+        return rejectWithValue("Error");
     }
 })
 
@@ -18,7 +19,7 @@ const productsSlice = createSlice({
     initialState : {
         products: [],
         error: '',
-        status: ''
+        status: 'idle'
     },
     reducers : { 
     },
@@ -35,8 +36,6 @@ const productsSlice = createSlice({
             })
             .addCase(fetchAllProducts.fulfilled, (state, action) => {
                 state.products = action.payload;
- 
- 
  
                 state.status = 'fulfilled'
             })

@@ -1,6 +1,6 @@
 // utils.js
 
-export const getColumns = () => [
+export const getColumns = [
     {
       Header: "Product Name",
       accessor: "Product_name",
