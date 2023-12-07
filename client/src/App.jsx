@@ -1,16 +1,18 @@
 import './App.css'
 
-// import LangingPage from './pages/landingPage'
-import ProductsPage from './pages/productsPage'
+// import LandingPage from './pages/landingPage'
+import SellerSignupLogin from './pages/sellerSignupLogin'
+// import ProductsPage from './pages/productsPage'
 
 
 function App() {
 
   return (
     <>
-      {/* <LangingPage/> */}
-      <ProductsPage/>
-    </>
+      {/* <LandingPage/> */}
+      {/* <ProductsPage/> */}
+      <SellerSignupLogin/>
+    </>                                                                               
   )
     
 }

@@ -1,20 +1,15 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
-import { FaSignInAlt, FaSignOutAlt } from 'react-icons/fa';
-import { LinkContainer } from 'react-router-bootstrap';
+import 'tailwindcss/tailwind.css'; // Import Tailwind CSS
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import http from '../../utils/http';
 
-import { logout} from '../../slices/authSlice' // Update the path accordingly
+import { logout } from '../../slices/authSlice';
 
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { sellerInfo } = useSelector((state) => state.auth);
-  console.log('Seller Info:', sellerInfo);
-
+  const { sellerInfo, ...rst } = useSelector((state) => state.auth);
 
   const logoutHandler = async () => {
     try {
@@ -28,38 +23,20 @@ const Header = () => {
 
   return (
     <header>
-      <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
-        <Container>
-          <LinkContainer to="/">
-            <Navbar.Brand>Seller Register and Auth</Navbar.Brand>
-          </LinkContainer>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="ms-auto">
-              {sellerInfo ? (
-                
-                <Nav.Link title={sellerInfo.username} id="username">
+      <nav className="bg-white w-screen mb-0  text-white shadow-md shadow-bottom-custom">
+        <div className="container mx-auto p-4">
+          <div className="flex items-center justify-between">
+            <div className="cursor-pointer">
+              <span className="text-lg text-black font-semibold">Seller Dashboard</span>
+            </div>
+            <div className="flex text-black items-center space-x-4">
+             <span title={sellerInfo.username} id="username">
                   {sellerInfo.username}
-                </Nav.Link>
-                
-              ) : (
-                <>
-                  <LinkContainer to="/login">
-                    <Nav.Link>
-                      <FaSignInAlt />Sign In
-                    </Nav.Link>
-                  </LinkContainer>
-                  <LinkContainer to="/register">
-                    <Nav.Link>
-                      <FaSignOutAlt />Sign Up
-                    </Nav.Link>
-                  </LinkContainer>
-                </>
-              )}
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+                </span>
+            </div>
+          </div>
+        </div>
+      </nav>
     </header>
   );
 };
