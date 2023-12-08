@@ -1,29 +1,29 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function Sidebar() {
   return (
-    <div className="max-w-sm bg-white h-full w-3/6 p-6 shadow-lg shadow-right-lg">
-      <Link
+    <div className="max-w-sm bg-white h-screen flex flex-col  w-3/6 p-6 shadow-lg shadow-right-lg">
+      <NavLink
         to="/profile"
-        className="text-lg font-semibold text-black p-4 rounded-lg block"
-        activeclassname="bg-gray-300"
+        className="text-lg font-semibold text-black p-4 rounded-lg block transition duration-300 ease-in-out hover:bg-blue-500 focus:bg-blue-500"
+        activeClassName="bg-blue-500"
       >
         Profile
-      </Link>
-      <Link
+      </NavLink>
+      <NavLink
         to="/products"
-        className="text-lg font-semibold text-black p-4 rounded-lg block"
-        activeclassname="bg-gray-300"
+        className="text-lg font-semibold text-black p-4 rounded-lg block transition duration-300 ease-in-out hover:bg-blue-500 focus:bg-blue-500"
+        activeClassName="bg-blue-500"
       >
         Products
-      </Link>
-      <Link
+      </NavLink>
+      <NavLink
         to="/orders"
-        className="text-lg font-semibold text-black p-4 rounded-lg block"
-        activeclassname="bg-gray-300"
+        className="text-lg font-semibold text-black p-4 rounded-lg block transition duration-300 ease-in-out hover:bg-blue-500 focus:bg-blue-500"
+        activeClassName="bg-blue-500"
       >
         Orders
-      </Link>
+      </NavLink>
     </div>
   );
 }

@@ -42,21 +42,27 @@ function Register() {
           password,
           confirmPassword,
         });
-      
+
         console.log('Response from registration:', response);
-      
-        // Check if the response has the expected structure
-        if (response.data && response.data.status === 'SUCCESS' && response.data.data) {
+
+        if (
+          response.data &&
+          response.data.status === 'SUCCESS' &&
+          response.data.data
+        ) {
           const userData = response.data.data;
-      
-          // Check if userData is an object (not an array) and has the expected properties
-          if (typeof userData === 'object' && userData.username) {
-            // Dispatch the action with the correct payload
-            dispatch(setCredentials({
-              token: null, // Update with the actual token if available in the response
-              data: [userData], // Wrap userData in an array
-            }));
-      
+
+          if (
+            typeof userData === 'object' &&
+            userData.username
+          ) {
+            dispatch(
+              setCredentials({
+                token: null,
+                data: [userData],
+              })
+            );
+
             navigate('/dashboard');
           } else {
             console.error('Invalid response format for registration');
@@ -68,17 +74,18 @@ function Register() {
         }
       } catch (error) {
         console.error('Error during registration:', error.message);
-        toast.error(error?.response?.data?.message || 'Registration failed. Please try again.');
+        toast.error(
+          error?.response?.data?.message ||
+            'Registration failed. Please try again.'
+        );
       }
-      
-      
     }
   };
 
   return (
     <FormContainer>
-      <div className="mx-auto max-w-md p-8 bg-white shadow-lg rounded">
-        <h1 className="text-3xl mb-6 font-bold">Sign Up</h1>
+      <div className="mx-auto max-w-md p-8 bg-white shadow-lg rounded-md md:w-3/4 lg:w-1/2 xl:w-1/3">
+        <h1 className="text-3xl mb-6 font-bold text-center">Sign Up</h1>
 
         <form onSubmit={submitHandler}>
           <div className="mb-4">
@@ -179,7 +186,10 @@ function Register() {
             />
           </div>
 
-          <button type="submit" className="bg-blue-500 text-white p-2 rounded-md w-full">
+          <button
+            type="submit"
+            className="bg-blue-500 text-white p-2 rounded-md w-full md:w-auto"
+          >
             Sign Up
           </button>
 

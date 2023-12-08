@@ -23,6 +23,7 @@ import Orders from "./component/seller/Orders.jsx";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
 import EditProfile from "./component/seller/EditProfile.jsx";
+import NewProduct from "./component/seller/NewProduct.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -36,6 +37,7 @@ const router = createBrowserRouter(
         <Route path="/profile" element={<Profile />} />
         <Route path="/EditProfile" element={<EditProfile/>} />
         <Route path="/products" element={<Products />} />
+        <Route path="/new-product" element={<NewProduct />} />
         <Route path="/orders" element={<Orders />} />
       </Route>
     </Route>
