@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Footer from '../footer.component';
 
 const NewProduct =({onProductSubmit}) => {
   const [formData, setFormData] = useState({
@@ -133,7 +134,7 @@ const NewProduct =({onProductSubmit}) => {
         <input
             type="number"
             name="discount_price"
-            value={formData.discount_price !== 0 ? formData.discount_price : ''}
+                            value={formData.discount_price !== 0 ? formData.discount_price : ''}
             onChange={handleChange}
             className="w-full border border-gray-300 p-2 rounded-md"
             
@@ -161,6 +162,9 @@ const NewProduct =({onProductSubmit}) => {
             </button>
           </div>
         </form>
+      </div>
+      <div className='block'>
+      <Footer/> 
       </div>
     </div>
   );
