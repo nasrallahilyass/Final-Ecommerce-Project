@@ -1,11 +1,12 @@
 
 import React, { useState } from 'react';
 import Img from '../assets/image/profile.png'
+import Logo from'../assets/image/CCrafty-1.svg'
 function Nav(){
     return(
 <div className="navbar bg-base-100">
-  <div className="flex-1">
-    <a className="btn btn-ghost text-xl">daisyUI</a>
+  <div className="flex-1 ">
+   <a href="" className='btn btn-ghost text-xl'><img src={Logo} alt="" /></a> 
   </div>
   <div className="flex-none gap-2">
     <div className="dropdown dropdown-end">
