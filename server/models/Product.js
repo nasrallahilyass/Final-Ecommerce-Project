@@ -35,6 +35,10 @@ const ProductSchema = new Schema({
     options:{
         type : Array,    
     },
+    seller_id:{
+        type: Schema.Types.ObjectId,
+        ref : 'User'
+    },
     active :{
         type: Boolean,
         default: false

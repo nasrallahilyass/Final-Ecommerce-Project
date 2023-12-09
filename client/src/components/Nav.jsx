@@ -1,12 +1,12 @@
 
 import React, { useState } from 'react';
 import Img from '../assets/image/profile.png'
-import Logo from'../assets/image/CCrafty-1.svg'
+import Logo from'../assets/image/out.png'
 function Nav(){
     return(
 <div className="navbar bg-base-100">
   <div className="flex-1 ">
-   <a href="" className='btn btn-ghost text-xl'><img src={Logo} alt="" /></a> 
+   <a href="" className='btn btn-ghost text-xl'><img src={Logo} alt="" className='btn btn-ghost text-xl'/></a> 
   </div>
   <div className="flex-none gap-2">
     <div className="dropdown dropdown-end">

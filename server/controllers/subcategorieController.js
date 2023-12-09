@@ -39,17 +39,18 @@ exports.GetAllSubcategories = async (req, res) => {
         active: subcategory.active,
         __v: subcategory.__v,
       }));
-  
       res.status(200).json({ data: formattedSubcategories });
     } catch (err) {
       console.error(err);
       res.status(500).json({ error: err.message });
     }
 }
+
 //get subcategory by id 
 exports.GetAllSubcategoriByID = async(req,res)=>{
   try {
     const subcategoryId = req.params.id;
+    console.log('Subcategory ID:', subcategoryId);
 
     if (!subcategoryId) {
       return res.status(400).json({ message: 'SubCategory ID is missing from the request' });

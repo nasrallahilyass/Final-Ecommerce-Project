@@ -10,17 +10,16 @@ const express = require("express");
 const cors = require("cors");
 const cookie = require('cookie-parser')
 const port = process.env.PORT || 5000; 
-
+const listEndpoints= require ('express-list-endpoints');
 
 const app = express();
 
 
 
 // Midll
-app.use(bodyParser())
-app.use(cookie())
-app.use('/v1',UserRouter)
-
+// app.use(bodyParser())
+app.use(cookie());
+app.use('/v1', UserRouter);
 app.use(cors());
 app.use(express.json());
 
@@ -33,7 +32,10 @@ app.use(express.static('public'));
 app.use('/v1', productRoutes);
 app.use('/v1', categorieRoutes);
 app.use('/v1', subcategorieRoutes);
-
+app.get('/list-endpoints', (req, res) => {
+  const endpoints = listEndpoints(app);
+  res.json(endpoints);
+});
 
 
 connectDb();

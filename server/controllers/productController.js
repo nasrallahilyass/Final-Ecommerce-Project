@@ -29,7 +29,35 @@ exports.getProducts = async (req, res) => {
 
 }
 //list product by id
- 
+exports.GetproductByID = async(req,res)=>{
+  try {
+    const productId = req.params.id;
+    console.log('product ID:', productId);
+
+    if (!productId) {
+      return res.status(400).json({ message: 'product ID is missing from the request' });
+    }
+
+    const product = await Product.findById(productId).populate("subcategory_id");
+
+    if (!Product) {
+      return res.status(404).json({ message: 'Product not found' });
+    }
+
+    // Modify the structure of the response object
+    const response = {
+      _id: product._id,
+      Product_name: product.Product_name,
+      subcategory_id: product.subcategory_id._id.toString(), // Convert to string
+      subcategory_name: product.subcategory_id.subcategory_name,
+      active: product.active,
+    };
+
+    res.status(200).json({ data: response });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+}
 // Update a product
 exports.updateProduct = async (req, res) => {
   const user = req.user; // User data from the token

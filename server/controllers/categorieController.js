@@ -1,5 +1,6 @@
 const Categorie = require('../models/Categorie');
 const Subcategorie = require('../models/Subcategory')
+const mongoose = require('mongoose');
 
 // Create category
 exports.createCategorie = async (req, res) => {
@@ -28,7 +29,7 @@ exports.createCategorie = async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 }
-//search for category 
+//search for category by name 
 exports.searchCategory= async (req, res) => {
   try {
     const categoryName = req.query.query;
@@ -72,6 +73,12 @@ exports.getCategorieByID = async (req, res) => {
 exports.getCategorie =async(req,res)=>{
     try {
         const categories = await Categorie.find();
+        const collections = await mongoose.connection.db.listCollections().toArray();
+console.log('Collections:', collections.map(collection => collection.name));
+
+// Log the content of the "categories" collection
+const categoryContent = await Categorie.find();
+console.log('Category Content:', categoryContent);
         if(!categories){
             return res.status(404).json({message : "thereIs no Categories"})
         }
