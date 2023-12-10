@@ -56,6 +56,7 @@ exports.getProducts = async (req, res) => {
 
         return {
           _id: product._id,
+          sku : product.sku,
           product_image:product.product_image,
           Product_name: product.Product_name,
 
@@ -75,6 +76,7 @@ exports.getProducts = async (req, res) => {
         console.error(`Error processing product with ID ${product._id}:`, error);
         return {
           _id: product._id,
+          sku : product.sku,
         Product_name: product.Product_name,
         subcategory_id: product.subcategory_id._id.toString(), // Convert to string
         subcategory_name: product.subcategory_id.subcategory_name,
@@ -110,6 +112,7 @@ exports.GetproductByID = async(req,res)=>{
     // Modify the structure of the response object
     const response = {
       _id: product._id,
+      sku : product.sku,
       Product_name: product.Product_name,
       subcategory_id: product.subcategory_id._id.toString(), // Convert to string
       subcategory_name: product.subcategory_id.subcategory_name,

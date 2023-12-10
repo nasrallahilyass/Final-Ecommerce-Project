@@ -231,34 +231,37 @@ function Table1({ data, handleActionsProductClick}) {
       </div>
       {/* here was tablecomponant func */}
       <div className="w-full min-w-[30rem] p-4 bg-white rounded-xl shadow-[0_4px_10px_rgba(0,0,0,0.03)]">
+        
         <table>
+        {/* herer was global filter */}
           <thead>
           {table.getHeaderGroups().map((headerGroup, index) => (
-  <tr key={index}>
-    {headerGroup.headers.map((header) => (
-      <th
-        key={header.id}
-        colSpan={header.colSpan}
-        className="px-3 text-start text-xs font-light uppercase cursor-pointer"
-      >
-        <div className="flex gap-2 items-center">
-          {header.isPlaceholder ? null : (
-            <div className="text-gray-600">
-              {flexRender(header.column.columnDef.header, header.getContext())}
-              {header.column.getCanFilter() ? (
-                <div className="flex flex-col">
-                  <Filter column={header.column} table={table} />
-                </div>
-              ) : null}
-            </div>
-          )}
-        </div>
-      </th>
-    ))}
-  </tr>
-))}
+            <tr key={index}>
+             {headerGroup.headers.map((header) => (
+               <th
+                 key={header.id}
+                colSpan={header.colSpan}
+                className="px-3 text-start text-xs font-light uppercase cursor-pointer"
+                >
+              <div className="flex gap-2 items-center">
+                {header.isPlaceholder ? null : (
+                  <div className="text-gray-600">
+                    {flexRender(header.column.columnDef.header, header.getContext())}
+                    {header.column.getCanFilter() ? (
+                      <div className="flex flex-col">
+                        <Filter column={header.column} table={table} />
+                      </div>
+                    ) : null}
+                  </div>
+                )}
+              </div>
+            </th>
+          ))}
+        </tr>
+      ))}
 
           </thead>
+        
           <tbody>
             {table.getRowModel().rows.map((row) => {
               console.log("row data", row.original);
