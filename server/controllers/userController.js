@@ -163,6 +163,9 @@ exports.signup = async (req, res) => {
 exports.signin = (req, res) => {
   // Your signin logic here
   let { email, password } = req.body;
+  if (!email || !password) {
+    return res.status(400).json({ message: 'Email and password are required.' });
+  }
   email = email.trim();
   password = password.trim();
 

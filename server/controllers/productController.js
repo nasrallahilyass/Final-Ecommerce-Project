@@ -1,6 +1,7 @@
 // Controller for product-related operations
 const Product = require('../models/Product');
 const SubCategorie = require('../models/Subcategory')
+const Categorie =require('../models/Categorie')
 
 // Create a product
 exports.createProduct = async (req, res) => {
@@ -15,19 +16,81 @@ exports.createProduct = async (req, res) => {
   }
 };
 
-// Listproducts--still needs pagination!
+// Listproducts
+// exports.getProducts = async (req, res) => {
+//   try {
+//     const products = await Product.find({}).populate('subcategory_id');
+//     if(!products){
+//         return res.status(404).json({message : "thereIs no products"})
+//     }
+//     const formattedproducts = products.map((product) => ({ 
+//       __id: product._id,
+//       Product_name: product.Product_name,
+//       subcategory_id: product.subcategory_id._id.toString(), // Convert to string
+//       subcategory_name: product.subcategory_id.subcategory_name,
+//       category_name: categorieName,
+//       active: product.active,
+//     }));
+//   res.status(200).json({ data: formattedproducts });
+//   } catch (err) {
+//     res.status(500).json({ error: err.message });
+//   }
+
+// }
+// List products
 exports.getProducts = async (req, res) => {
   try {
     const products = await Product.find({}).populate('subcategory_id');
-    if(!products){
-        return res.status(404).json({message : "thereIs no products"})
+    
+    if (!products || products.length === 0) {
+      return res.status(404).json({ message: "There are no products" });
     }
-    res.json(products);
+
+    const formattedProducts = await Promise.all(products.map(async (product) => {
+      try {
+        // Access subcategory information
+        const subcategory = product.subcategory_id;
+
+        // Find the category using the category_id from the subcategory
+        const category = await Categorie.findById(subcategory.categorie_id);
+
+        return {
+          _id: product._id,
+          product_image:product.product_image,
+          Product_name: product.Product_name,
+
+          subcategory_id: product.subcategory_id._id.toString(), // Convert to string
+          subcategory_name: product.subcategory_id.subcategory_name,
+          short_description : product.short_description,
+          long_description:product.long_description,
+          price : product.price,
+          discount_price :product.discount_price,
+          options : product.options,
+          seller_id: product.seller_id,
+          category_id : category._id,
+          category_name: category.category_name,
+          active: product.active,
+        };
+      } catch (error) {
+        console.error(`Error processing product with ID ${product._id}:`, error);
+        return {
+          _id: product._id,
+        Product_name: product.Product_name,
+        subcategory_id: product.subcategory_id._id.toString(), // Convert to string
+        subcategory_name: product.subcategory_id.subcategory_name,
+        category_id : category._id,
+        category_name: category.category_name,
+        active: product.active,
+        };
+      }
+    }));
+
+    res.status(200).json({ data: formattedProducts });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
+};
 
-}
 //list product by id
 exports.GetproductByID = async(req,res)=>{
   try {
@@ -43,13 +106,15 @@ exports.GetproductByID = async(req,res)=>{
     if (!Product) {
       return res.status(404).json({ message: 'Product not found' });
     }
-
+    const categorie = await Categorie.findById(product.subcategory_id.categorie_id)
     // Modify the structure of the response object
     const response = {
       _id: product._id,
       Product_name: product.Product_name,
       subcategory_id: product.subcategory_id._id.toString(), // Convert to string
       subcategory_name: product.subcategory_id.subcategory_name,
+      category_id : categorie._id,
+     category_name: categorie.category_name,
       active: product.active,
     };
 
@@ -98,9 +163,14 @@ exports.updateProduct = async (req, res) => {
 // Delete a product
 exports.deleteProduct = async (req, res) => {
   try {
-    await Product.findByIdAndRemove(req.params.id);
-    res.sendStatus(204);
+    const deletedProduct = await Product.findByIdAndRemove(req.params.id);
+
+    if (!deletedProduct) {
+      return res.status(404).json({ error: 'Product not found' });
+    }
+
+    res.status(200).json({ message: 'Product deleted successfully', deletedProduct });
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    res.status(500).json({ error: err.message });
   }
-}
+};

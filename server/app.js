@@ -14,20 +14,19 @@ const listEndpoints= require ('express-list-endpoints');
 
 const app = express();
 
+const corsOptions = {
+  origin: 'http://localhost:5173',
+  credentials: true, // Allow credentials (cookies, authorization headers, etc.)
+};
 
+app.use(cors(corsOptions));
 
 // Midll
 // app.use(bodyParser())
 app.use(cookie());
-app.use('/v1', UserRouter);
-app.use(cors());
 app.use(express.json());
-
-
-
 app.use(express.static('public'));
-
-
+app.use('/v1', UserRouter);
 //products/categorie
 app.use('/v1', productRoutes);
 app.use('/v1', categorieRoutes);

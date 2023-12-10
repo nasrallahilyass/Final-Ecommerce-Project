@@ -27,11 +27,15 @@ function Login() {
   const submitHandler = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-
+  
+    console.log('Email:', email);
+    console.log('Password:', password);
+  
     try {
       const response = await http.post('/users/login', { email, password });
       dispatch(setCredentials({ ...response.data }));
     } catch (err) {
+      console.error('Login error:', err);
       toast.error(err?.response?.data?.message || err.message);
     } finally {
       setIsLoading(false);

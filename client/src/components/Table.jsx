@@ -40,10 +40,13 @@ const columns = [
   columnHelper.accessor("Product_name", {
     header: "Product Name",
     cell: ({ row, getValue }) => {
+      const productImage = row.original.product_image;
+      const avatarAlt = getValue?.() ? `${getValue()} Avatar` : "avatar";
+
       return (
         <div className="flex gap-2 items-center">
-          <Avatar src={row.original.product_image} alt={`${getValue()}'s Avatar`} />
-          <div>{getValue()}</div>
+          <Avatar src={productImage} alt={avatarAlt} />
+          <div>{getValue?.()}</div>
         </div>
       );
     },
@@ -63,7 +66,7 @@ const columns = [
   columnHelper.accessor('options', {
     header: 'Options',
     cell: ({ row, getValue }) => {
-      const value = getValue();
+      const value = getValue?.() || []; // Use an empty array as a default
       return (
         <div className="relative">
           <select
@@ -90,23 +93,33 @@ const columns = [
   columnHelper.accessor('active', {
     header: 'Active',
     cell: ({ getValue }) => {
-      return getValue() ? 'Yes' : 'No';
+      return getValue?.() ? 'Yes' : 'No';
     },
   }),
+  columnHelper.accessor('subcategory_name', {
+    header: 'Subcategory Name',
+    cell: ({ row }) => {
+      return row.original.subcategory_name || ''; // Use an empty string as a default
+    },
+  }),
+  columnHelper.accessor('seller_id', {
+    header: 'Seller ID',
+    cell: ({ row }) => {
+      return row.original.seller_id || ''; // Use an empty string as a default
+    },
+  }),
+  columnHelper.accessor('category_name', {
+    header: 'Category Name',
+    cell: ({ row }) => {
+      return row.original.category_name || ''; // Use an empty string as a default
+    },
+  }),
+  
   columnHelper.accessor('actions', {
-    header: 'Actions',
-    cell: ({ row }) => (
-      <div className="flex gap-2">
-        <button onClick={() => handleActionsProductClick(row)}>
-          <FaTrash />
-        </button>
-        <button onClick={() => handleActionsProductClick(row)}>
-          <FaEdit />
-        </button>
-      </div>
-    ),
+    header: 'Actions'
   }),
 ];
+
 
 function InputGroup7({
   label,
@@ -131,7 +144,7 @@ function InputGroup7({
         type={type}
         placeholder={label}
         aria-label={label}
-        onChange={onChange} nn
+        onChange={onChange} 
         className={`peer block w-full p-3 text-gray-600 focus:outline-none focus:ring-0 appearance-none ${disabled ? "bg-gray-200" : ""
           } ${inputClassName}`}
         disabled={disabled}
@@ -146,238 +159,6 @@ function InputGroup7({
   );
 }
 
-function GlobalSearchFilter({
-  globalFilter,
-  setGlobalFilter,
-  className = "",
-}) {
-  return (
-    <InputGroup7
-      name="search"
-      value={globalFilter || ""}
-      onChange={(e) => setGlobalFilter(e.target.value)}
-      label="Search"
-      decoration={<FaSearch size="1rem" className="text-gray-400" />}
-      className={className}
-    />
-  );
-}
-
-function SelectMenu({ value, setValue, options, className = "", disabled }) {
-  const selectedOption = useMemo(
-    () => options.find((o) => o.id === value),
-    [options, value]
-  );
-  return (
-    <Listbox value={value} onChange={setValue} disabled={disabled}>
-      <div className={`relative w-full ${className}`}>
-        <Listbox.Button
-          className={`relative w-full  rounded-xl py-3 pl-3 pr-10 text-base text-gray-700 text-left shadow-[0_4px_10px_rgba(0,0,0,0.03)] focus:outline-none
-          ${disabled
-              ? "bg-gray-200 cursor-not-allowed"
-              : "bg-white cursor-default"
-            }
-        
-        `}
-        >
-          <span className="block truncate">{selectedOption.caption}</span>
-          <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-            <FaChevronDown
-              size="0.80rem"
-              className="text-gray-400"
-              aria-hidden="true"
-            />
-          </span>
-        </Listbox.Button>
-        <Transition
-          as={Fragment}
-          leave="transition ease-in duration-100"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
-        >
-          <Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-xl bg-white text-base shadow-[0_4px_10px_rgba(0,0,0,0.03)] focus:outline-none">
-            {options.map((option) => (
-              <Listbox.Option
-                key={option.id}
-                className={({ active }) =>
-                  `relative cursor-default select-none py-3 pl-10 pr-4 ${active ? "bg-red-100" : ""
-                  }`
-                }
-                value={option.id}
-              >
-                {({ selected }) => (
-                  <>
-                    <span
-                      className={`block truncate ${selected ? "font-medium" : "font-normal"
-                        }`}
-                    >
-                      {option.caption}
-                    </span>
-                    {selected ? (
-                      <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-red-400">
-                        <FaCheck size="0.5rem" aria-hidden="true" />
-                      </span>
-                    ) : null}
-                  </>
-                )}
-              </Listbox.Option>
-            ))}
-          </Listbox.Options>
-        </Transition>
-      </div>
-    </Listbox>
-  );
-}
-
-function Button2({ content, onClick, active, disabled }) {
-  return (
-    <button
-      className={`flex flex-col cursor-pointer items-center justify-center w-9 h-9 shadow-[0_4px_10px_rgba(0,0,0,0.03)] text-sm font-normal transition-colors rounded-lg
-      ${active ? "bg-red-500 text-white" : "text-red-500"}
-      ${!disabled
-          ? "bg-white hover:bg-red-500 hover:text-white"
-          : "text-red-300 bg-white cursor-not-allowed"
-        }
-      `}
-      onClick={onClick}
-      disabled={disabled}
-    >
-      {content}
-    </button>
-  );
-}
-
-// function PaginationNav({
-//   gotoPage,
-//   canPreviousPage,
-//   canNextPage,
-//   pageCount,
-//   pageIndex,
-// }) {
-//   const renderPageLinks = useCallback(() => {
-//     if (pageCount === 0) return null;
-//     const visiblePageButtonCount = 3;
-//     let numberOfButtons =
-//       pageCount < visiblePageButtonCount ? pageCount : visiblePageButtonCount;
-//     const pageIndices = [pageIndex];
-//     numberOfButtons--;
-//     [...Array(numberOfButtons)].forEach((_item, itemIndex) => {
-//       const pageNumberBefore = pageIndices[0] - 1;
-//       const pageNumberAfter = pageIndices[pageIndices.length - 1] + 1;
-//       if (
-//         pageNumberBefore >= 0 &&
-//         (itemIndex < numberOfButtons / 2 || pageNumberAfter > pageCount - 1)
-//       ) {
-//         pageIndices.unshift(pageNumberBefore);
-//       } else {
-//         pageIndices.push(pageNumberAfter);
-//       }
-//     });
-//     return pageIndices.map((pageIndexToMap) => (
-//       <li key={pageIndexToMap}>
-//         <Button2
-//           content={pageIndexToMap + 1}
-//           onClick={() => gotoPage(pageIndexToMap)}
-//           active={pageIndex === pageIndexToMap}
-//         />
-//       </li>
-//     ));
-//   }, [pageCount, pageIndex]);
-//   return (
-//     <ul className="flex gap-2">
-//       <li>
-//         <Button2
-//           content={
-//             <div className="flex ml-1">
-//               <FaChevronLeft size="0.6rem" />
-//               <FaChevronLeft size="0.6rem" className="-translate-x-1/2" />
-//             </div>
-//           }
-//           onClick={() => gotoPage(0)}
-//           disabled={!canPreviousPage}
-//         />
-//       </li>
-//       {renderPageLinks()}
-//       <li>
-//         <Button2
-//           content={
-//             <div className="flex ml-1">
-//               <FaChevronRight size="0.6rem" />
-//               <FaChevronRight size="0.6rem" className="-translate-x-1/2" />
-//             </div>
-//           }
-//           onClick={() => gotoPage(pageCount - 1)}
-//           disabled={!canNextPage}
-//         />
-//       </li>
-//     </ul>
-//   );
-// }
-
-function TableComponent({
-  getTableProps,
-  headerGroups,
-  getTableBodyProps,
-  rows,
-  prepareRow,
-}) {
-  return (
-    <div className="w-full min-w-[30rem] p-4 bg-white rounded-xl shadow-[0_4px_10px_rgba(0,0,0,0.03)]">
-      <table {...getTableProps()}>
-        <thead>
-          {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
-                <th
-                  {...column.getHeaderProps(column.getSortByToggleProps())}
-                  className="px-3 text-start text-xs font-light uppercase cursor-pointer"
-                  style={{ width: column.width }}
-                >
-                  <div className="flex gap-2 items-center">
-                    <div className="text-gray-600">
-                      {column.render("Header")}
-                    </div>
-                    <div className="flex flex-col">
-                      <FaSortUp
-                        className={`text-sm translate-y-1/2 ${column.isSorted && !column.isSortedDesc
-                          ? "text-red-400"
-                          : "text-gray-300"
-                          }`}
-                      />
-                      <FaSortDown
-                        className={`text-sm -translate-y-1/2 ${column.isSortedDesc ? "text-red-400" : "text-gray-300"
-                          }`}
-                      />
-                    </div>
-                  </div>
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {rows.map((row, i) => {
-            prepareRow(row);
-            return (
-              <tr {...row.getRowProps()} className="hover:bg-gray-100">
-                {row.cells.map((cell) => {
-                  return (
-                    <td
-                      {...cell.getCellProps()}
-                      className="p-3 text-sm font-normal text-gray-700 first:rounded-l-lg last:rounded-r-lg"
-                    >
-                      {cell.render("Cell")}
-                    </td>
-                  );
-                })}
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
-  );
-}
 
 function Filter({
   column,
@@ -430,7 +211,7 @@ function Filter({
   }
 }
 
-function Table1({ data }) {
+function Table1({ data, handleActionsProductClick}) {
   console.log("data", data);
   const table = useReactTable(
     {
@@ -446,87 +227,42 @@ function Table1({ data }) {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col sm:flex-row justify-between">
-        {/* <GlobalSearchFilter
-          className="sm:w-64"
-          globalFilter={state.globalFilter}
-          setGlobalFilter={setGlobalFilter}
-        />
-        <SelectMenu
-          className="sm:w-44"
-          value={pageSize}
-          setValue={setPageSize}
-          options={[
-            { id: 5, caption: "5 items per page" },
-            { id: 10, caption: "10 items per page" },
-            { id: 20, caption: "20 items per page" },
-          ]}
-        /> */}
-        {/* <button onClick={() => handleActionsProductClick()}>
-          <FaPlus />
-        </button>, */}
+        {/* herer was global filter */}
       </div>
-      {/* <TableComponent
-        // getTableProps={getTableProps}
-        // headerGroups={headerGroups}
-        // getTableBodyProps={getTableBodyProps}
-        // rows={rows}
-        // prepareRow={prepareRow}
-        {...{
-          data,
-          columns,
-        }}
-      /> */}
+      {/* here was tablecomponant func */}
       <div className="w-full min-w-[30rem] p-4 bg-white rounded-xl shadow-[0_4px_10px_rgba(0,0,0,0.03)]">
         <table>
           <thead>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <tr key={headerGroup._id}>
-                {headerGroup.headers.map((header) => (
-                  <th
-                    key={header.id}
-                    colSpan={header.colSpan}
-                    className="px-3 text-start text-xs font-light uppercase cursor-pointer"
-                  >
-                    {/* <div className="flex gap-2 items-center">
-                      <div className="text-gray-600">
-                        {column.render("Header")}
-                      </div>
-                      <div className="flex flex-col">
-                        <FaSortUp
-                          className={`text-sm translate-y-1/2 ${column.isSorted && !column.isSortedDesc
-                            ? "text-red-400"
-                            : "text-gray-300"
-                            }`}
-                        />
-                        <FaSortDown
-                          className={`text-sm -translate-y-1/2 ${column.isSortedDesc ? "text-red-400" : "text-gray-300"
-                            }`}
-                        />
-                      </div>
-                    </div> */}
-                    <div className="flex gap-2 items-center">
+          {table.getHeaderGroups().map((headerGroup, index) => (
+  <tr key={index}>
+    {headerGroup.headers.map((header) => (
+      <th
+        key={header.id}
+        colSpan={header.colSpan}
+        className="px-3 text-start text-xs font-light uppercase cursor-pointer"
+      >
+        <div className="flex gap-2 items-center">
+          {header.isPlaceholder ? null : (
+            <div className="text-gray-600">
+              {flexRender(header.column.columnDef.header, header.getContext())}
+              {header.column.getCanFilter() ? (
+                <div className="flex flex-col">
+                  <Filter column={header.column} table={table} />
+                </div>
+              ) : null}
+            </div>
+          )}
+        </div>
+      </th>
+    ))}
+  </tr>
+))}
 
-                      {header.isPlaceholder ? null : (
-                        <div className="text-gray-600">                        {flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-
-                          {header.column.getCanFilter() ? (
-                            <div className="flex flex-col">
-                              <Filter column={header.column} table={table} />
-                            </div>
-                          ) : null}
-                        </div>
-                      )}
-                    </div>
-                  </th>
-                ))}
-              </tr>
-            ))}
           </thead>
           <tbody>
-            {table.getRowModel().rows.map((row, i) => {
+            {table.getRowModel().rows.map((row) => {
+              console.log("row data", row.original);
+
               return (
                 <tr key={row.id} className="hover:bg-gray-100">
                   {row.getVisibleCells().map((cell) => {
@@ -535,9 +271,17 @@ function Table1({ data }) {
                         key={cell.id}
                         className="p-3 text-sm font-normal text-gray-700 first:rounded-l-lg last:rounded-r-lg"
                       >
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
+                        {cell.column.id === 'actions' ? (
+                          <div className="flex gap-2">
+                            <button onClick={() => handleActionsProductClick(row.original._id)}>
+                              <FaTrash />
+                            </button>
+                            <button onClick={() => handleActionsProductClick(row.original._id)}>
+                              <FaEdit />
+                            </button>
+                          </div>
+                        ) : (
+                          flexRender(cell.column.columnDef.cell, cell.getContext())
                         )}
                       </td>
                     );
@@ -546,6 +290,7 @@ function Table1({ data }) {
               );
             })}
           </tbody>
+
         </table>
       </div>
       <div className="flex justify-center">

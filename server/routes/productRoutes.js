@@ -11,9 +11,9 @@ router.get('/products', getProducts);
 //get product by id
 router.get('/products/:id',GetproductByID)
 // Update a product
-router.put('products/:id', updateProduct);
+router.put('/products/:id', updateProduct);
 
 // Delete a product
-router.delete('products/:id', deleteProduct);
+router.delete('/products/:id', deleteProduct);
 
 module.exports = router;

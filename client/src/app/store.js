@@ -1,5 +1,5 @@
 // import { configureStore } from '@reduxjs/toolkit'
-// import ProductsReducer from "./reducers/ProductsSlice"
+ import ProductsReducer from "./reducers/ProductsSlice"
 // import persistedReducer from '../slices/authSlice'
 
 // export default configureStore({
@@ -21,6 +21,7 @@ import {
 
 const store = configureStore({
   reducer: {
+    productsList : ProductsReducer,
     cards: cardsReducer,
     auth: authReducer,
     [apiSlice.reducerPath]: apiSlice.reducer,
