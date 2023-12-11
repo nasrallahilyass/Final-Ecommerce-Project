@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String, 
-    enum: ['admin', 'manager'],
+    enum: ['admin', 'seller'],
     required: true,
   },
   last_login: {
@@ -41,6 +41,10 @@ const userSchema = new mongoose.Schema({
   created_at: {
     type: Date,
     default: Date.now,
+  },
+  products_ids: {
+    type: [String],
+   
   },
 });
 

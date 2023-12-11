@@ -362,6 +362,7 @@ exports.updateUser = async (req, res) => {
 //Delete a user
 exports.deleteUser = async (req, res) => {
   // Get the user's ID from the URL parameter
+  try {
   const userId = req.params.id;
 
   // Assuming you have a 'role' field in your User model
@@ -373,10 +374,9 @@ exports.deleteUser = async (req, res) => {
     return res.status(403).json({
       status: "FAILED",
       message:
-        "Unauthorized: Only admin and manager users can access this endpoint.",
+        "Unauthorized: Only admin and seller users can access this endpoint.",
     });
   }
-  try {
     // Delete the user by ID
     await User.findByIdAndDelete(userId);
 

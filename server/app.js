@@ -4,11 +4,15 @@ require('./config/database')
 const UserRouter = require("./routes/userRoutes")
 const bodyParser = require('express').json;
 const customerRoutes = require("./routes/customerRoutes.js");
+const productRoutes = require("./routes/productRoutes.js");
+const categorieRoutes = require("./routes/categorieRoutes.js");
+const subcategorieRoutes = require("./routes/subcategorieRoutes.js")
 const session = require("express-session");
 const express = require("express");
 const cors = require("cors");
 const cookieParser = require('cookie-parser')
 const port = process.env.PORT || 5000; 
+const listEndpoints= require ('express-list-endpoints');
 
 
 const app = express();
@@ -40,6 +44,16 @@ app.use(
 app.use('/v1',UserRouter)
 app.use("/customers", customerRoutes);
 
+
+//products/categorie
+app.use('/v1', productRoutes);
+app.use('/v1', categorieRoutes);
+app.use('/v1', subcategorieRoutes);
+
+app.get('/list-endpoints', (req, res) => {
+  const endpoints = listEndpoints(app);
+  res.json(endpoints);
+});
 
 
 
