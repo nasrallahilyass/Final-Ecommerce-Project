@@ -34,7 +34,7 @@ exports.CreateSubcategory = async (req, res) => {
 exports.GetAllSubcategories = async (req, res) => {
   try {
     const subcategories = await SubCategorie.find({}).populate("categorie_id");
-    console.log(subcategories);
+
     const formattedSubcategories = subcategories.map((subcategory) => ({
       _id: subcategory._id,
       subcategory_name: subcategory.subcategory_name,
