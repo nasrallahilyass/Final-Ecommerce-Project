@@ -16,6 +16,7 @@ function Dashboard() {
     <>
       <NewProduct onProductSubmit={addProduct} />
       <Products productList={products} />
+      
     </>
   );
 }

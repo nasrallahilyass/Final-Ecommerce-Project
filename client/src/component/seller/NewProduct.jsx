@@ -416,9 +416,7 @@ const NewProduct = ({ onProductSubmit }) => {
           </form>
         </div>
       </div>
-      <div className="block">
-        <Footer />
-      </div>
+      
     </>
   );
 };

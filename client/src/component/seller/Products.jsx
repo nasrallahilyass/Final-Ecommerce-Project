@@ -1,12 +1,14 @@
 import React from 'react';
 import { Button } from "primereact/button";
 import { Link } from 'react-router-dom';
+import Footer from '../footer.component';
 
 const Products = ({productList}) =>{
 
 
   return (
-    <div className="flex justify-between">
+    <>
+      <div className="flex justify-between">
       <div>
         <h1 className="text-2xl font-bold mb-4">Products</h1>
         {/* Your product content goes here */}
@@ -34,6 +36,9 @@ const Products = ({productList}) =>{
       )}
       {/* Existing code */}
     </div>
+    
+    </>
+    
     
     
   );
