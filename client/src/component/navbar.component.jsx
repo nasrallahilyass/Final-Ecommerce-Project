@@ -13,7 +13,9 @@ const Navbar = () => {
     <nav className="p-4 w-11/12 mx-auto">
       <div className=" container mx-auto flex items-center justify-between">
         {/* Logo and Category Icon */}
+        <Link to="/">
         <img src={Logo} alt="" className="max-w-[9rem] h-auto" />
+        </Link>
         {/* Category Icons */}
         <div className="hidden md:flex pl-12 space-x-7 text-l">
           <a href="#" className="hover:text-gray-400">
