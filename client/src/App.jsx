@@ -1,3 +1,4 @@
+import { Routes, Route } from 'react-router-dom';
 
 import { useEffect } from "react";
 import './App.css'
@@ -9,17 +10,21 @@ import { fetchAllProducts } from "./app/reducers/ProductsSlice";
 // import { Table1Presentation } from "./components/DataTable";
 import Products from"./page/Products"
 import LangingPage from './pages/landingPage'
-// import ProductsPage from './pages/productsPage'
 function App() {
-
+  
   return (
-    <div className="">
+    <Routes>
+        <Route path='/' element={<LangingPage />} />
+        <Route path="/products" element={<ProductsPage/>} />
+    </Routes>
+    
+    // <div className="">
 
-      <Dashboard/>
-      {/* <LangingPage/> */}
-      {/* <ProductsPage/> */}
-      {/* <Dashboard/> */}
-    </div>
+    //   {/* <Dashboard/> */}
+    //   {/* <LangingPage/> */}
+    //   {/* <ProductsPage/> */}
+    //   {/* <Dashboard/> */}
+    // </div>
   )
     
 }
