@@ -19,25 +19,25 @@ function Features() {
       icon: <FaPaypal size={32} />,
       title: "SEO Services",
       description:
-        "This is a wider card with supporting text below as a natural content.",
+        "We've made your shopping experience seamless and secure with PayPal.",
     },
     {
       icon: <FaAirbnb size={32} />,
       title: "Social Content",
       description:
-        "This is a wider card with supporting text below as a natural content.",
+        "Sponsored by Aibnb, Thank you, Airbnb, for being an integral part of our journey.",
     },
     {
       icon: <BiLogoDribbble size={32} />,
       title: "Creative ads",
       description:
-        "This is a wider card with supporting text below as a natural content.",
+        "We are grateful for the support of Dribbble, a platform that celebrates creativity and design.",
     },
     {
       icon: <BiLogoMediumOld size={32} />,
       title: "Brand Identity",
       description:
-        "This is a wider card with supporting text below as a natural content.",
+        "We're proud to showcase our brand identity 'MediumOld. brovides a unique branding experiences",
     },
   ];
 

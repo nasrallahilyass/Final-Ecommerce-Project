@@ -73,12 +73,10 @@ exports.getCategorieByID = async (req, res) => {
 exports.getCategorie =async(req,res)=>{
     try {
         const categories = await Categorie.find();
-        const collections = await mongoose.connection.db.listCollections().toArray();
-console.log('Collections:', collections.map(collection => collection.name));
+  
 
 // Log the content of the "categories" collection
-const categoryContent = await Categorie.find();
-console.log('Category Content:', categoryContent);
+      
         if(!categories){
             return res.status(404).json({message : "thereIs no Categories"})
         }

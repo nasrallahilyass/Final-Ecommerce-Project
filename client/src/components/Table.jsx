@@ -23,11 +23,7 @@ import { Listbox, Transition } from "@headlessui/react";
 const columnHelper = createColumnHelper()
 
 
-function Avatar({ src, alt = "avatar" }) {
-  return (
-    <img src={src} alt={alt} className="w-8 h-8 rounded-full object-cover" />
-  );
-}
+
 // const generateData = (numberOfRows = 25) =>
 //   [...Array(numberOfRows)].map(() => ({
 //     name: faker.name.fullName(),
@@ -36,89 +32,89 @@ function Avatar({ src, alt = "avatar" }) {
 //     accountName: faker.finance.accountName(),
 //     amount: faker.finance.amount(500, 1e4, 2, "$"),
 //   }));
-const columns = [
-  columnHelper.accessor("Product_name", {
-    header: "Product Name",
-    cell: ({ row, getValue }) => {
-      const productImage = row.original.product_image;
-      const avatarAlt = getValue?.() ? `${getValue()} Avatar` : "avatar";
+// const columns = [
+//   columnHelper.accessor("Product_name", {
+//     header: "Product Name",
+//     cell: ({ row, getValue }) => {
+//       const productImage = row.original.product_image;
+//       const avatarAlt = getValue?.() ? `${getValue()} Avatar` : "avatar";
 
-      return (
-        <div className="flex gap-2 items-center">
-          <Avatar src={productImage} alt={avatarAlt} />
-          <div>{getValue?.()}</div>
-        </div>
-      );
-    },
-  }),
-  columnHelper.accessor('sku', {
-    header: 'SKU',
-  }),
-  columnHelper.accessor('short_description', {
-    header: 'Short Description',
-  }),
-  columnHelper.accessor('price', {
-    header: 'Price',
-  }),
-  columnHelper.accessor('discount_price', {
-    header: 'Discount Price',
-  }),
-  columnHelper.accessor('options', {
-    header: 'Options',
-    cell: ({ row, getValue }) => {
-      const value = getValue?.() || []; // Use an empty array as a default
-      return (
-        <div className="relative">
-          <select
-            className="block appearance-none w-full bg-white border border-gray-300 hover:border-gray-400 px-4 py-2 pr-8 rounded-xl shadow leading-tight focus:outline-none focus:shadow-outline-blue focus:border-blue-300"
-            defaultValue={value[0]}
-          >
-            {value.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-            <FaChevronDown
-              size="0.80rem"
-              className="text-gray-400"
-              aria-hidden="true"
-            />
-          </div>
-        </div>
-      );
-    },
-  }),
-  columnHelper.accessor('active', {
-    header: 'Active',
-    cell: ({ getValue }) => {
-      return getValue?.() ? 'Yes' : 'No';
-    },
-  }),
-  columnHelper.accessor('subcategory_name', {
-    header: 'Subcategory Name',
-    cell: ({ row }) => {
-      return row.original.subcategory_name || ''; // Use an empty string as a default
-    },
-  }),
-  columnHelper.accessor('seller_id', {
-    header: 'Seller ID',
-    cell: ({ row }) => {
-      return row.original.seller_id || ''; // Use an empty string as a default
-    },
-  }),
-  columnHelper.accessor('category_name', {
-    header: 'Category Name',
-    cell: ({ row }) => {
-      return row.original.category_name || ''; // Use an empty string as a default
-    },
-  }),
+//       return (
+//         <div className="flex gap-2 items-center">
+//           <Avatar src={productImage} alt={avatarAlt} />
+//           <div>{getValue?.()}</div>
+//         </div>
+//       );
+//     },
+//   }),
+//   columnHelper.accessor('sku', {
+//     header: 'SKU',
+//   }),
+//   columnHelper.accessor('short_description', {
+//     header: 'Short Description',
+//   }),
+//   columnHelper.accessor('price', {
+//     header: 'Price',
+//   }),
+//   columnHelper.accessor('discount_price', {
+//     header: 'Discount Price',
+//   }),
+//   columnHelper.accessor('options', {
+//     header: 'Options',
+//     cell: ({ row, getValue }) => {
+//       const value = getValue?.() || []; // Use an empty array as a default
+//       return (
+//         <div className="relative">
+//           <select
+//             className="block appearance-none w-full bg-white border border-gray-300 hover:border-gray-400 px-4 py-2 pr-8 rounded-xl shadow leading-tight focus:outline-none focus:shadow-outline-blue focus:border-blue-300"
+//             defaultValue={value[0]}
+//           >
+//             {value.map((option) => (
+//               <option key={option} value={option}>
+//                 {option}
+//               </option>
+//             ))}
+//           </select>
+//           <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+//             <FaChevronDown
+//               size="0.80rem"
+//               className="text-gray-400"
+//               aria-hidden="true"
+//             />
+//           </div>
+//         </div>
+//       );
+//     },
+//   }),
+//   columnHelper.accessor('active', {
+//     header: 'Active',
+//     cell: ({ getValue }) => {
+//       return getValue?.() ? 'Yes' : 'No';
+//     },
+//   }),
+//   columnHelper.accessor('subcategory_name', {
+//     header: 'Subcategory Name',
+//     cell: ({ row }) => {
+//       return row.original.subcategory_name || ''; // Use an empty string as a default
+//     },
+//   }),
+//   columnHelper.accessor('seller_id', {
+//     header: 'Seller ID',
+//     cell: ({ row }) => {
+//       return row.original.seller_id || ''; // Use an empty string as a default
+//     },
+//   }),
+//   columnHelper.accessor('category_name', {
+//     header: 'Category Name',
+//     cell: ({ row }) => {
+//       return row.original.category_name || ''; // Use an empty string as a default
+//     },
+//   }),
   
-  columnHelper.accessor('actions', {
-    header: 'Actions'
-  }),
-];
+//   columnHelper.accessor('actions', {
+//     header: 'Actions'
+//   }),
+// ];
 
 
 function InputGroup7({
@@ -160,14 +156,16 @@ function InputGroup7({
 }
 
 
-function Filter({
-  column,
-  table,
-}) {
+function Filter({ column, table }) {
   const firstValue = table.getPreFilteredRowModel().flatRows[0]?.getValue(column.id);
   const columnFilterValue = column.getFilterValue();
 
   const commonInputStyles = 'w-24 border shadow rounded';
+
+  if (column.id === 'actions'|| column.id ==='categorie_id'|| column.id ==='active') {
+    // No filter for the "Actions" column
+    return null;
+  }
 
   if (typeof firstValue === 'number') {
     return (
@@ -211,7 +209,8 @@ function Filter({
   }
 }
 
-function Table1({ data, handleActionsProductClick}) {
+
+function Table1({ data, handleActionsProductClick,columns}) {
   console.log("data", data);
   const table = useReactTable(
     {

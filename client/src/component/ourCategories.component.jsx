@@ -1,19 +1,19 @@
 
 const teamMembers = [
   {
-    name: 'Oliver Aguilerra',
-    imageUrl: 'https://images.unsplash.com/photo-1609881583302-61548332039c?q=80&w=1788&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    name: 'Pearl Making',
+    imageUrl: 'https://images.pexels.com/photos/8100366/pexels-photo-8100366.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
   },
   {
-    name: 'Marta Clermont',
+    name: 'Knitting',
     imageUrl: 'https://images.unsplash.com/photo-1632649027900-389e810204e6?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
   },
   {
-    name: 'Alice Melbourne',
+    name: 'pottery',
     imageUrl: 'https://plus.unsplash.com/premium_photo-1679868096292-54efdc6c021f?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
   },
   {
-    name: 'John Doe',
+    name: 'wooden',
     imageUrl: 'https://images.unsplash.com/photo-1615243639681-1208d685758a?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
   },
 ];
@@ -59,7 +59,7 @@ function OurCategories() {
           Exclusive Categories
         </h3>
         <p className="text-zinc-400 md:text-lg font-normal">
-        check out this week&apos;s selections of popular product that might catch your eye and don&apos;t
+        check out this breathTaking selections of popular Craftys that might catch your eye and don&apos;t miss it !
         </p>
       </div>
       <div className="grid gap-10 mx-auto sm:grid-cols-2 lg:grid-cols-4 lg:max-w-screen-lg">

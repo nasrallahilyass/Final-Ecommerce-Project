@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAllProducts, deleteProduct } from "../app/reducers/ProductsSlice";
 import { Table1 } from "../components/Table";
+import {Productscolumns} from "../utils/TableColumns"
+const pcolumns =Productscolumns 
 export default function Products() {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.productsList.products);
@@ -31,7 +33,8 @@ export default function Products() {
 
   return (
     <div className="flex flex-col overflow-auto py-4 sm:py-0">
-        <Table1 data={products} handleActionsProductClick={handleDeleteProduct}  />
+             <button class="btn btn-sm">Create Product</button>
+        <Table1 data={products} handleActionsProductClick={handleDeleteProduct} columns={pcolumns} />
     </div>
   );
 }

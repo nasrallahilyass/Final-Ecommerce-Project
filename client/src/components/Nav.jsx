@@ -6,7 +6,7 @@ function Nav(){
     return(
 <div className="navbar bg-base-100">
   <div className="flex-1 ">
-   <a href="" className='btn btn-ghost text-xl'><img src={Logo} alt="" className='btn btn-ghost text-xl'/></a> 
+   <a href="" ><img src={Logo} alt="" className='btn btn-ghost'/></a> 
   </div>
   <div className="flex-none gap-2">
     <div className="dropdown dropdown-end">

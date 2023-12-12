@@ -1,11 +1,11 @@
 function ProductCardLeft() {
     const cardsData = [
       {
-        title: "Lorem Ipsum Is Cool.",
+        title: " Visit Alex Green's Collection ",
         description:
-          "Lorem Ipsum is so cool and awesome to act and so cool to think. And very awesome to eat and talk.",
+          " Hi I'm Alex Knitting is not just a craft for me; it's a journey of warmth, creativity, and endless possibilities. Every stitch tells a story, and I'm here to share those stories with you.",
         imageSrc:
-          "https://plus.unsplash.com/premium_photo-1683141245819-1f70521446c8?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "https://images.pexels.com/photos/6347524/pexels-photo-6347524.jpeg?auto=compress&cs=tinysrgb&w=600",
       },
       // Add more card data objects as needed
     ];
@@ -31,8 +31,7 @@ function ProductCardLeft() {
                   {/* <a href="/comingsoon" className="flex object-cover sm:mr-64 mr-32 object-top items-center border border-2 justify-center w-full sm:px-10 py-4 leading-6 bg-black rounded-lg font-black">
                       &nbsp;&nbsp;<img width={25} alt="google auth logo" src={card.buttonImageSrc} />&nbsp;&nbsp; Get Started
                     </a> */}
-                    <button className="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800">Hello</button>
-  
+                    <button className="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800">Alex Crafts</button>
                 </div>
               </div>
             </div>

@@ -1,9 +1,9 @@
 function ProductCardRight() {
     const cardsData = [
       {
-        title: "Lorem Ipsum Is Cool.",
+        title: "Visit Pavel's Arts Creation.",
         description:
-          "Lorem Ipsum is so cool and awesome to act and so cool to think. And very awesome to eat and talk.",
+          "I'm Pavel, a passionate potter with a love for shaping clay into unique and meaningful pieces. My journey with pottery is a dance between tradition and innovation, and I'm excited to share the magic of this craft with you..",
         imageSrc:
           "https://plus.unsplash.com/premium_photo-1682146955240-a051576d4c89?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       },
@@ -28,7 +28,7 @@ function ProductCardRight() {
                 </div>
                 <div className="flex items-center space-x-3">
                   <button className="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800">
-                    Hello
+                    Pavel's Art
                   </button>
                 </div>
               </div>

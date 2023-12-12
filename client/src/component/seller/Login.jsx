@@ -17,10 +17,12 @@ function Login() {
 
   const { sellerInfo, jwt } = useSelector((state) => state.auth);
   const [isLoading, setIsLoading] = useState(false);
-
+//added login feature to navigate to the Admin Dashboard
   useEffect(() => {
-    if (jwt) {
+    if (jwt || sellerInfo.role==="seller") {
       navigate('/dashboard');
+    }else if(jwt||sellerInfo.role==="admin"){
+      navigate('/admindashboard')
     }
   }, [navigate, jwt]);
 

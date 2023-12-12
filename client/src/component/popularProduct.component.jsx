@@ -1,42 +1,42 @@
 const products = [
   {
     id: 1,
-    name: "Basic Tee",
+    name: "Large cheese Lady Bowl",
     href: "#",
     imageSrc:
       "https://images.unsplash.com/photo-1689173337256-693c073c856d?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     imageAlt: "Front of men's Basic Tee in black.",
-    price: "$35",
-    color: "Black",
+    price: "$50",
+    color: "Beige",
   },
   {
     id: 1,
-    name: "Basic Tee",
+    name: "Knitted Socks",
     href: "#",
     imageSrc:
-      "https://images.unsplash.com/photo-1671535108665-eeeb723ebebf?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://images.pexels.com/photos/160438/ankle-socks-children-socks-knitted-greeting-160438.jpeg?auto=compress&cs=tinysrgb&w=600",
     imageAlt: "Front of men's Basic Tee in black.",
-    price: "$35",
-    color: "Black",
+    price: "$9",
+    color: "pink",
   },
   {
     id: 1,
-    name: "Basic Tee",
+    name: "Cup",
     href: "#",
     imageSrc:
       "https://images.unsplash.com/photo-1641302063626-add5862ed2fc?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     imageAlt: "Front of men's Basic Tee in black.",
-    price: "$35",
-    color: "Black",
+    price: "$16",
+    color: "Whit",
   },
   {
     id: 1,
-    name: "Basic Tee",
+    name: "Bead neckless",
     href: "#",
     imageSrc:
       "https://images.unsplash.com/photo-1625844723242-85d56adc0b1c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     imageAlt: "Front of men's Basic Tee in black.",
-    price: "$35",
+    price: "$30",
     color: "Black",
   },
 ];

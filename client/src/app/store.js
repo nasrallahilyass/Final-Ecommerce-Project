@@ -1,5 +1,7 @@
 // import { configureStore } from '@reduxjs/toolkit'
  import ProductsReducer from "./reducers/ProductsSlice"
+ import subCategoriesReducer from"./reducers/subcategorieSlice"
+ import CategoriesReducer from"./reducers/CategorieSlice"
 // import persistedReducer from '../slices/authSlice'
 
 // export default configureStore({
@@ -21,6 +23,8 @@ import {
 
 const store = configureStore({
   reducer: {
+    subCategoriesList : subCategoriesReducer,
+    CategoriesList: CategoriesReducer,
     productsList : ProductsReducer,
     cards: cardsReducer,
     auth: authReducer,
