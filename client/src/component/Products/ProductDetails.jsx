@@ -96,9 +96,9 @@ const averageRating = avg.toFixed(2);
   };
 
   return (
-    <div className="bg-white">
+    <div className="bg-gray">
       {data ? (
-        <div className={`${styles.section} w-[90%] 800px:w-[80%]`}>
+        <div className={`${styles.section} w-[90%] 800px:w-[80%] mx-auto mt-5 p-5 border rgrayhadow-lg`} style={{ padding: '15px' }}>
           <div className="w-full py-5">
             <div className="block w-full 800px:flex">
               <div className="w-full 800px:w-[50%]">
