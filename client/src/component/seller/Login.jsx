@@ -15,6 +15,8 @@ function Login() {
 
   const { sellerInfo, jwt } = useSelector((state) => state.auth);
 
+
+
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -85,5 +87,4 @@ function Login() {
     </div>
   );
 }
-
 export default Login;
