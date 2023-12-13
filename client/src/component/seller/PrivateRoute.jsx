@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
-import Header from "./Header";
-import Sidebar from "./SideBar";
+import Header from "../../components/Nav";
+import Sidebar from "../../components/Sidebar";
 
 function PrivateRoute() {
   const { jwt } = useSelector((state) => state.auth);
@@ -19,6 +19,5 @@ function PrivateRoute() {
   ) : (
     <Navigate to="/login" replace />
   );
-}
-
+}useSelector
 export default PrivateRoute;

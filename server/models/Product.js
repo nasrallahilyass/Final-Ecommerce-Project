@@ -6,7 +6,7 @@ const ProductSchema = new Schema({
         unique: true
     },
     product_image:{
-        type: String,
+        type: Array,
         required:true
     },
     Product_name:{
@@ -33,15 +33,16 @@ const ProductSchema = new Schema({
         type : Number 
     },
     options:{
-        type : Array,    
-    },
-    seller_id:{
-        type: Schema.Types.ObjectId,
-        ref : 'User'
+        type : Array,
     },
     active :{
         type: Boolean,
         default: false
+    },
+    seller_id: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
     }
 })
 

@@ -146,4 +146,46 @@ const Productscolumns = [
           header: 'Actions'
         }),
   ]
-export {Productscolumns,SubcategoryColumns,CategoryColumns} ;
+  const CostumerColumns = [
+    columnHelper.accessor("_id.$oid", {
+      header: "Customer ID",
+      cell: ({ row }) => {
+        return row.original._id?.$oid || ''; // Use an empty string as a default
+      },
+    }),
+    columnHelper.accessor("first_name", {
+      header: "First Name",
+      cell: ({ row }) => {
+        return row.original.first_name || ''; // Use an empty string as a default
+      },
+    }),
+    columnHelper.accessor("last_name", {
+      header: "Last Name",
+      cell: ({ row }) => {
+        return row.original.last_name || ''; // Use an empty string as a default
+      },
+    }),
+    columnHelper.accessor("email", {
+      header: "Email",
+      cell: ({ row }) => {
+        return row.original.email || ''; // Use an empty string as a default
+      },
+    }),
+    columnHelper.accessor("valid_account", {
+      header: "Valid Account",
+      cell: ({ row }) => {
+        return row.original.valid_account ? 'Yes' : 'No';
+      },
+    }),
+    columnHelper.accessor("creation_date.$date", {
+      header: "Creation Date",
+      cell: ({ row }) => {
+        return row.original.creation_date?.$date || ''; // Use an empty string as a default
+      },
+    }),
+    columnHelper.accessor('actions', {
+      header: 'Actions'
+    }),
+  ];
+  
+export {Productscolumns,SubcategoryColumns,CategoryColumns,CostumerColumns,} ;

@@ -20,9 +20,8 @@ function Sidebar() {
       <NavLink
         to="/orders"
         className="text-lg font-semibold text-black p-4 rounded-lg block transition duration-300 ease-in-out hover:bg-blue-500 focus:bg-blue-500"
-        activeclassname="bg-blue-500"
-      >
-        Orders
+        activeclassname="bg-blue-500">
+      Orders
       </NavLink>
     </div>
   );

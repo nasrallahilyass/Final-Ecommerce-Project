@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchAllcategories, deletecategorie} from "../app/reducers/CategorieSlice";
 import { Table1 } from "../components/Table";
 import {CategoryColumns} from "../utils/TableColumns"
+import { Link } from 'react-router-dom';
 const Catcolumns =CategoryColumns
 export default function Categorie() {
   const dispatch = useDispatch();
@@ -33,6 +34,9 @@ export default function Categorie() {
 
   return (
     <div className="flex flex-col overflow-auto py-4 sm:py-0">
+      <Link to="/new-category">
+      <button class="btn btn-sm">Create category</button>
+      </Link> 
         <Table1 data={categories} handleActionsProductClick={handleDeletecategorie} columns={Catcolumns} />
     </div>
   );

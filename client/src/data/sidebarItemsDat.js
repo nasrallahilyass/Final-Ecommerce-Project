@@ -8,27 +8,13 @@ export const sidebarItemsData = [
     {
         icon: LuLayoutDashboard,
         text: 'Dashboard',
-        path: '/admin/dashboard',
+        path: '/dashboard',
     },
-    {
-        icon: BiUser,
-        text: 'Customers',
-        path: '/admin/customers',
-    },
-    {
-        icon: BiUser,
-        text: 'Users',
-        path: '/admin/users',
-    },
+    
     {
         icon: MdOutlineDiscount,
         text: 'Products',
-        path: '/admin/products',
-    },
-    {
-        icon: HiOutlineShoppingBag,
-        text: 'Orders',
-        path: '/admin/orders',
+        path: '/products',
     },
     {
         icon: BiCategory,
@@ -41,9 +27,22 @@ export const sidebarItemsData = [
         path: '/admin/subcategories',
     },
     {
+        icon: BiUser,
+        text: 'Customers',
+        path: '/customers',
+    },
+    { icon: LuUsers2,
+     text: 'Sellers', 
+     path: '/admin/S' },
+    {
+        icon: HiOutlineShoppingBag,
+        text: 'Orders',
+        path: '/admin/orders',
+    },
+    {
         icon: BiTransfer,
         text: 'Transactions',
         path: '/admin/dashboard',
     },
-    { icon: LuUsers2, text: 'Sellers', path: '/admin/dashboard' },
+    
 ];

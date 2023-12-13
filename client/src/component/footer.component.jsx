@@ -1,148 +1,86 @@
-import { FaFacebook, FaInstagram, FaTwitter, FaGithub, FaDribbble } from 'react-icons/fa';
+import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTwitter, faFacebookSquare, faDribbble, faGithub } from '@fortawesome/free-brands-svg-icons';
 
-const Footer = () => {
+function Footer() {
   return (
-    <footer className="bg-white">
-      <div className="mx-auto max-w-screen-xl px-4 pb-8 pt-8 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-md">
-          <strong className="block text-center text-xl font-bold text-gray-900 sm:text-3xl">
-            Want us to email you with the latest blockbuster news?
-          </strong>
-
-          <form className="mt-6">
-            <div className="relative max-w-lg">
-              <label className="sr-only" htmlFor="email"> Email </label>
-
-              <input
-                className="w-full rounded-full border-gray-200 bg-gray-100 p-4 pe-32 text-sm font-medium"
-                id="email"
-                type="email"
-                placeholder="john@doe.com"
-              />
-
-              <button
-                className="absolute end-1 top-1/2 -translate-y-1/2 rounded-full bg-black px-5 py-3 text-sm font-medium text-white transition hover:bg-blue-700"
-              >
-                Subscribe
+    <footer className="relative bg-blueGray-200 pt-8 pb-6">
+      <div className="container mt-20 px-4 pl-[4.25rem]">
+        <div className="flex flex-wrap text-left lg:text-left">
+          <div className="w-full lg:w-6/12 px-4">
+            <h4 className="text-3xl font-semibold text-blueGray-700">Let's keep in touch!</h4>
+            <h5 className="text-lg mt-0 mb-2 text-blueGray-600">
+              Find us on any of these platforms, we respond 1-2 business days.
+            </h5>
+            <div className="mt-6 lg:mb-0 mb-6">
+              <button className="bg-white text-lightBlue-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2" type="button">
+                <FontAwesomeIcon icon={faTwitter} />
+              </button>
+              <button className="bg-white text-lightBlue-600 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2" type="button">
+                <FontAwesomeIcon icon={faFacebookSquare} />
+              </button>
+              <button className="bg-white text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2" type="button">
+                <FontAwesomeIcon icon={faDribbble} />
+              </button>
+              <button className="bg-white text-blueGray-800 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2" type="button">
+                <FontAwesomeIcon icon={faGithub} />
               </button>
             </div>
-          </form>
-        </div>
-
-        <div className="mt-16 grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-32">
-          <div className="mx-auto max-w-sm lg:max-w-none">
-            <p className="mt-4 text-center text-gray-500 lg:text-left lg:text-lg">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium
-              natus quod eveniet aut perferendis distinctio iusto repudiandae,
-              provident velit earum?
-            </p>
-
-            <div className="mt-6 flex justify-center gap-4 lg:justify-start">
-              <a className="text-gray-700 transition hover:text-gray-700/75" href="" target="_blank" rel="noreferrer">
-                <FaFacebook />
-              </a>
-              <a className="text-gray-700 transition hover:text-gray-700/75" href="" target="_blank" rel="noreferrer">
-                <FaInstagram />
-              </a>
-              <a className="text-gray-700 transition hover:text-gray-700/75" href="" target="_blank" rel="noreferrer">
-                <FaTwitter />
-              </a>
-              <a className="text-gray-700 transition hover:text-gray-700/75" href="" target="_blank" rel="noreferrer">
-                <FaGithub />
-              </a>
-              <a className="text-gray-700 transition hover:text-gray-700/75" href="" target="_blank" rel="noreferrer">
-                <FaDribbble />
-              </a>
-            </div>
           </div>
 
-          <div className="grid grid-cols-1 gap-8 text-center lg:grid-cols-3 lg:text-left">
-            <div>
-              <strong className="font-medium text-gray-900"> Services </strong>
-              <ul className="mt-6 space-y-1">
-                <li>
-                  <a className="text-gray-700 transition hover:text-gray-700/75" href="/">
-                    Marketing
-                  </a>
-                </li>
-                <li>
-                  <a className="text-gray-700 transition hover:text-gray-700/75" href="/">
-                    Graphic Design
-                  </a>
-                </li>
-                <li>
-                  <a className="text-gray-700 transition hover:text-gray-700/75" href="/">
-                    App Development
-                  </a>
-                </li>
-                <li>
-                  <a className="text-gray-700 transition hover:text-gray-700/75" href="/">
-                    Web Development
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <strong className="font-medium text-gray-900"> About </strong>
-              <ul className="mt-6 space-y-1">
-                <li>
-                  <a className="text-gray-700 transition hover:text-gray-700/75" href="/">
-                    About
-                  </a>
-                </li>
-                <li>
-                  <a className="text-gray-700 transition hover:text-gray-700/75" href="/">
-                    Careers
-                  </a>
-                </li>
-                <li>
-                  <a className="text-gray-700 transition hover:text-gray-700/75" href="/">
-                    History
-                  </a>
-                </li>
-                <li>
-                  <a className="text-gray-700 transition hover:text-gray-700/75" href="/">
-                    Our Team
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <strong className="font-medium text-gray-900"> Support </strong>
-              <ul className="mt-6 space-y-1">
-                <li>
-                  <a className="text-gray-700 transition hover:text-gray-700/75" href="/">
-                    FAQs
-                  </a>
-                </li>
-                <li>
-                  <a className="text-gray-700 transition hover:text-gray-700/75" href="/">
-                    Contact
-                  </a>
-                </li>
-                <li>
-                  <a className="text-gray-700 transition hover:text-gray-700/75" href="/">
-                    Live Chat
-                  </a>
-                </li>
-              </ul>
+          <div className="w-full lg:w-6/12 px-4">
+            <div className="flex flex-wrap items-top mb-6">
+              <div className="w-full lg:w-4/12 px-4 ml-auto">
+                <span className="block uppercase text-blueGray-500 text-sm font-semibold mb-2">Useful Links</span>
+                <ul className="list-unstyled">
+                  <li>
+                    <a className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://www.creative-tim.com/presentation?ref=njs-profile">About Us</a>
+                  </li>
+                  <li>
+                    <a className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://blog.creative-tim.com?ref=njs-profile">Blog</a>
+                  </li>
+                  <li>
+                    <a className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://www.github.com/creativetimofficial?ref=njs-profile">Github</a>
+                  </li>
+                  <li>
+                    <a className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://www.creative-tim.com/bootstrap-themes/free?ref=njs-profile">Free Products</a>
+                  </li>
+                </ul>
+              </div>
+              <div className="w-full lg:w-4/12 px-4">
+                <span className="block uppercase text-blueGray-500 text-sm font-semibold mb-2">Other Resources</span>
+                <ul className="list-unstyled">
+                  <li>
+                    <a className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://github.com/creativetimofficial/notus-js/blob/main/LICENSE.md?ref=njs-profile">MIT License</a>
+                  </li>
+                  <li>
+                    <a className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://creative-tim.com/terms?ref=njs-profile">Terms &amp; Conditions</a>
+                  </li>
+                  <li>
+                    <a className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://creative-tim.com/privacy?ref=njs-profile">Privacy Policy</a>
+                  </li>
+                  <li>
+                    <a className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://creative-tim.com/contact-us?ref=njs-profile">Contact Us</a>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
-
-        <div className="mt-16 border-gray-100 pt-1">
-          <p className="text-center text-xs/relaxed text-gray-500">
-            © Company 2022. All rights reserved.
-            <br />
-            Created with
-            <a href="" className="text-gray-700 underline transition hover:text-gray-700/75">Laravel</a>
-            and
-            <a href="" className="text-gray-700 underline transition hover:text-gray-700/75">Laravel Livewire</a>.
-          </p>
+        <hr className="my-6 border-blueGray-300" />
+        <div className="flex flex-wrap items-center md:justify-between justify-center">
+          <div className="w-full md:w-4/12 px-4 mx-auto text-center">
+            <div className="text-sm text-blueGray-500 font-semibold py-1">
+              Copyright Â© <span id="get-current-year">2021</span>
+              <a href="https://www.creative-tim.com/product/notus-js" className="text-blueGray-500 hover:text-gray-800" target="_blank" rel="noopener noreferrer"> Notus JS by
+                <a href="https://www.creative-tim.com?ref=njs-profile" className="text-blueGray-500 hover:text-blueGray-800">Creative Tim</a>.
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
   );
-};
+}
 
 export default Footer;

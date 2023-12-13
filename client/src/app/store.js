@@ -12,6 +12,9 @@
 // })
 // src/store/store.js
 
+// src/store/store.js
+// src/store/store.js
+
 import { configureStore } from '@reduxjs/toolkit';
 import cardsReducer from '../redux/card';
 import { combineReducers,createEntityAdapter} from "@reduxjs/toolkit";
@@ -20,7 +23,7 @@ import { apiSlice } from "../slices/apiSlice";
 import {
   FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE,persistReducer,} from "redux-persist";
 
-
+  
 const store = configureStore({
   reducer: {
     subCategoriesList : subCategoriesReducer,

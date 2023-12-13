@@ -1,5 +1,3 @@
-// import Hero from "./Hero";
-
 import React from 'react';
 import { useSelector } from 'react-redux';
 import Hero from './Hero'; 
@@ -16,4 +14,4 @@ function HomeScreen() {
   
 }
 
-export default HomeScreen;
+export default HomeScreen

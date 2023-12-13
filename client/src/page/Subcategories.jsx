@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchAllSubcategories, deletesubcategorie} from "../app/reducers/subcategorieSlice";
 import { Table1 } from "../components/Table";
 import {SubcategoryColumns} from "../utils/TableColumns"
+import { Link } from 'react-router-dom';
 const Scolumns =SubcategoryColumns
 export default function Subcategories() {
   const dispatch = useDispatch();
@@ -33,6 +34,9 @@ export default function Subcategories() {
 
   return (
     <div className="flex flex-col overflow-auto py-4 sm:py-0">
+      <Link to="/new-Subcategory">
+      <button class="btn btn-sm">Create Subcategory</button>
+      </Link> 
         <Table1 data={subcategories} handleActionsProductClick={handleDeleteSubcategorie} columns={Scolumns} />
     </div>
   );

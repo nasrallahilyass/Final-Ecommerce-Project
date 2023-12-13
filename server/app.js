@@ -1,5 +1,6 @@
 // Main application file
 require('dotenv').config();
+const CostumerRoutes = require('./routes/customerRoutes')
 const productRoutes = require('./routes/productRoutes');
 const categorieRoutes = require('./routes/categorieRoutes');
 const subcategorieRoutes = require('./routes/subcategorieRoutes');
@@ -26,6 +27,7 @@ app.use(cors(corsOptions));
 app.use(cookie());
 app.use(express.json());
 app.use(express.static('public'));
+app.use('/v1', UserRouter);
 app.use('/v1', UserRouter);
 //products/categorie
 app.use('/v1', productRoutes);

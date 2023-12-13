@@ -2,7 +2,7 @@ import React, { useState , useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateUserData } from '../../slices/authSlice';
 
-function EditAProfile() {
+function EditProfile() {
 
   const dispatch = useDispatch();
   const { sellerInfo } = useSelector((state) => state.auth);
@@ -117,4 +117,4 @@ function EditAProfile() {
   );
 }
 
-export default EditAProfile;
+export default EditProfile;

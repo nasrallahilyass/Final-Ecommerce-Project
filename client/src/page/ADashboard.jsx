@@ -1,15 +1,15 @@
 import React from 'react'
 import Products from './Products'
-import Sidebar from '../components/sidebar'
+import Sidebar from '../components/Sidebar'
 import Nav from'../components/Nav'
 import Subcategories from './Subcategories'
 import Categorie from './Categorie'
-function Dashboard() {
+function ADashboard() {
 
   return (
     <div className=''>
         <Sidebar/>
-        <div className='flex flex-col w-screen pl-[4.25rem]'>
+        <div className=' w-screen pl-[4.25rem]'>
         <Nav/>
         
         <Products/>
@@ -18,4 +18,4 @@ function Dashboard() {
     </div>
   )
 }
-export default Dashboard
+export default ADashboard

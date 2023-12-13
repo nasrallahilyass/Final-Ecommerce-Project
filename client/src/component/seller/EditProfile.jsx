@@ -1,9 +1,9 @@
 import React, { useState , useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateUserData } from '../../slices/authSlice';
-
+import {Link, useNavigate } from 'react-router-dom'
 function EditProfile() {
-
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { sellerInfo } = useSelector((state) => state.auth);
 
@@ -46,6 +46,7 @@ function EditProfile() {
         })
       );
       console.log('After Axios request');
+      navigate('/profile');
     } catch (error) {
       console.error('Error updating profile:', error.message);
     }

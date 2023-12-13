@@ -73,4 +73,5 @@ const persistedReducer = persistReducer(
 );
 
 export const { setCredentials, setSellerInfo, logout } = authSlice.actions;
+
 export default persistedReducer;

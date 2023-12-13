@@ -1,9 +1,13 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchAllProducts, deleteProduct } from "../app/reducers/ProductsSlice";
-import { Table1 } from "../components/Table";
-import {Productscolumns} from "../utils/TableColumns"
+import React from 'react';
+import { Button } from "primereact/button";
 import { Link } from 'react-router-dom';
+import Footer from '../footer.component';
+import  { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchAllProducts, deleteProduct } from "../../app/reducers/ProductsSlice";
+import { Table1 } from "../../components/Table";
+import {Productscolumns} from "../../utils/TableColumns"
+
 const pcolumns =Productscolumns 
 export default function Products() {
   const dispatch = useDispatch();
