@@ -193,7 +193,7 @@ const NewProduct = ({ onProductSubmit }) => {
   return (
     <>
       <div className="container mx-auto mt-8 flex justify-center">
-        <div className="w-full max-w-md border p-6 rounded-md">
+        <div className="w-200 border p-6 rounded-md">
           <h1 className="text-3xl font-bold mb-4">New Product</h1>
           <form onSubmit={handleSubmit}>
             {/* Input for SKU */}

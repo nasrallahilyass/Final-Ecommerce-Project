@@ -8,6 +8,7 @@ import { InputText } from 'primereact/inputtext';
 import { Button } from "primereact/button";
 import { useNavigate } from 'react-router-dom';
 import img from '../../profile.png';
+// import img from '../../assets/image/profile.png';
 import http from "../../utils/http";
 
 function Profile() {
@@ -20,7 +21,6 @@ function Profile() {
 
   const avatarFinal = avatar.map((item) => item.pview);
 
-  const navigate = useNavigate();
 
   const onClose = () => {
     setPview(null);

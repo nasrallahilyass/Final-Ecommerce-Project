@@ -16,33 +16,33 @@ export const sidebarItemsData = [
         text: 'Products',
         path: '/products',
     },
-    {
-        icon: BiCategory,
-        text: 'Categories',
-        path: '/admin/categories',
-    },
-    {
-        icon: BiCategoryAlt,
-        text: 'Subcategories',
-        path: '/admin/subcategories',
-    },
-    {
-        icon: BiUser,
-        text: 'Customers',
-        path: '/customers',
-    },
-    { icon: LuUsers2,
-     text: 'Sellers', 
-     path: '/admin/S' },
+    // {
+    //     icon: BiCategory,
+    //     text: 'Categories',
+    //     path: '/admin/categories',
+    // },
+    // {
+    //     icon: BiCategoryAlt,
+    //     text: 'Subcategories',
+    //     path: '/admin/subcategories',
+    // },
+    // {
+    //     icon: BiUser,
+    //     text: 'Customers',
+    //     path: '/customers',
+    // },
+    // { icon: LuUsers2,
+    //  text: 'Sellers', 
+    //  path: '/admin/S' },
     {
         icon: HiOutlineShoppingBag,
         text: 'Orders',
         path: '/admin/orders',
     },
-    {
-        icon: BiTransfer,
-        text: 'Transactions',
-        path: '/admin/dashboard',
-    },
+    // {
+    //     icon: BiTransfer,
+    //     text: 'Transactions',
+    //     path: '/admin/dashboard',
+    // },
     
 ];

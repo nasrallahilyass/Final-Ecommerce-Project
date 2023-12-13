@@ -35,7 +35,7 @@ export default function Products() {
   return (
     <div className="flex flex-col overflow-auto py-4 sm:py-0">
       <Link to="/new-product">
-      <button class="btn btn-sm">Create Product</button>
+      <button className="btn btn-sm">Create Product</button>
       </Link>      
         <Table1 data={products} handleActionsProductClick={handleDeleteProduct} columns={pcolumns} />
     </div>

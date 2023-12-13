@@ -51,13 +51,13 @@ function EditProfile() {
       console.error('Error updating profile:', error.message);
     }
   };
-  
-  
-  
-  
-
   return (
-    <form className="border rounded-md shadow-md p-4 mt-8 ml-8">
+    <form 
+    onSubmit={(e) => {
+      e.preventDefault()
+      handleSave()
+    }}
+    className="border rounded-md shadow-md p-4 mt-8 ml-8">
       <h2 className="text-xl font-semibold mb-4">Update the profile</h2>
       <div className="mb-4">
         <label htmlFor="username" className="block font-semibold text-sm mb-2">
@@ -110,7 +110,7 @@ function EditProfile() {
       </div>
       <button
         className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
-        onClick={handleSave}
+        
       >
         Save Changes
       </button>

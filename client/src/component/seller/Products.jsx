@@ -13,7 +13,7 @@ export default function Products() {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.productsList.products);
   const status = useSelector((state) => state.productsList.status);
-
+  const { sellerInfo } = useSelector((state) => state.auth);
   useEffect(() => {
     console.log("Fetching products...");
     dispatch(fetchAllProducts());
@@ -35,13 +35,14 @@ export default function Products() {
     return <p>Error fetching products.</p>;
   
   console.log("Products:", products); // Log the response here
-
+   
+  const sellerProducts = products.filter((product) => product.seller_id === sellerInfo._id);
   return (
     <div className="flex flex-col overflow-auto py-4 sm:py-0">
       <Link to="/new-product">
-      <button class="btn btn-sm">Create Product</button>
+      <button className="btn btn-sm">Create Product</button>
       </Link>      
-        <Table1 data={products} handleActionsProductClick={handleDeleteProduct} columns={pcolumns} />
+        <Table1 data={sellerProducts} handleActionsProductClick={handleDeleteProduct} columns={pcolumns} />
     </div>
   );
 }

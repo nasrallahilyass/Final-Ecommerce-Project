@@ -4,12 +4,12 @@ function MDashboard() {
   return (
     <div>
       
-      <div className="flex overflow-hidden bg-white pt-16  justify-center">
+      {/* <div className="flex overflow-hidden bg-white pt-16  justify-center"> */}
        
-        <div
+        {/* <div
           id="main-content"
           className="h-full w-full bg-gray-50 relative overflow-y-auto lg:ml-64"
-        >
+        > */}
           <main>
             <div className="pt-6 px-4">
               <div className="w-full grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-4">
@@ -39,8 +39,10 @@ function MDashboard() {
                       </svg>
                     </div>
                   </div>
+                  <img src="../assets/image/chartss.png" alt="" className="z-2" />
                   <div id="main-chart" />
                 </div>
+                
                 <div className="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
                   <div className="mb-4 flex items-center justify-between">
                     <div>
@@ -594,9 +596,9 @@ function MDashboard() {
               </div>
             </div>
           </main>         
-        </div>
+        {/* </div> */}
       </div>
-    </div>
+    // </div>
   );
 }
 

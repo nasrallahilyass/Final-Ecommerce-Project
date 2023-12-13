@@ -26,9 +26,9 @@ import {
   
 const store = configureStore({
   reducer: {
+    productsList : ProductsReducer,
     subCategoriesList : subCategoriesReducer,
     CategoriesList: CategoriesReducer,
-    productsList : ProductsReducer,
     cards: cardsReducer,
     auth: authReducer,
     [apiSlice.reducerPath]: apiSlice.reducer,

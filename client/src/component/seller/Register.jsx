@@ -1,3 +1,6 @@
+
+
+
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -7,7 +10,7 @@ import { setCredentials } from '../../slices/authSlice';
 import http from '../../utils/http';
 import Img from '../../assets/image/mini.png';
 
-function Register() { 
+function Register() {
   const [username, setUsername] = useState('');
   const [first_name, setFirstname] = useState('');
   const [last_name, setLastname] = useState('');
@@ -23,7 +26,7 @@ function Register() {
 
   useEffect(() => {
     if (sellerInfo) {
-      navigate('/');
+      navigate('/dashboard');
     }
   }, [navigate, sellerInfo]);
 

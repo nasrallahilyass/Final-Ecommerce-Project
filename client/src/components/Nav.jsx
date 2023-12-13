@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import Img from '../assets/image/profile.png'
+import Img  from '../assets/images/profile.png';
 import Logo from'../assets/image/out.png'
 import { Link } from 'react-router-dom';
 function Nav(){
@@ -24,7 +24,7 @@ function Nav(){
           </a>
       </Link>
         </li>
-        <Link to="/profile"><li><a>Logout</a></li> </Link>
+        <Link to="/Login"><li><a>Logout</a></li> </Link>
       </ul>
     </div>
   </div>

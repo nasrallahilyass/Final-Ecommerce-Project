@@ -20,7 +20,7 @@ function Login() {
 
   useEffect(() => {
     if (sellerInfo && jwt) {
-      navigate('/dashboard');
+      navigate('/profile');
     }
   }, [navigate, jwt]);
 
